@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Architettura Reti</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f4f4f4; }
+    .question { margin-bottom: 1.5rem; background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); display: none; }
+    .answers { display: grid; gap: 0.75rem; margin-top: 1rem; }
+    .answer-option { background: #e9ecef; padding: 1rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: background 0.3s; }
+    .answer-option:hover { background: #d1dce5; }
+    .answer-option input[type="checkbox"] { transform: scale(1.5); }
+    .submit-btn, .next-btn, .confirm-btn { margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+    .result, .feedback { font-weight: bold; margin-top: 1rem; }
+    .correct { color: green; }
+    .wrong { color: red; }
+  </style>
+</head>
+<body>
+  <h1>random mibbbbbn reti 0-64</h1>
+  <form id="quizForm"></form>
+  <button class="confirm-btn" onclick="confirmAnswer(event)">Conferma Risposta</button>
+  <button class="next-btn" onclick="nextQuestion(event)" style="display:none;">Avanti</button>
+  <div id="result" class="result"></div>
+
+  <script>
+
+    const questions =[
+    {
+    "q": "Quale dei seguenti elementi non è una topologia di rete?",
+    "options": ["Stella", "Local bus", "Bus", "Albero", "Anello"],
+    "correct": [1]
+  },
+  {
+    "q": "Indicare quale tra le seguenti proprietà è caratterizzante nella distinzione reti connectionless e connectione oriented",
+    "options": [
+      "Presenza di fili",
+      "Presenza di traffico di dati",
+      "Presenza di pacchetti relativi all’attivazione di una connessione",
+      "Presenza di pacchetti di dati",
+      "Presenza di corrente elettrica"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Indicare quale metodo di accesso caratterizza una rete Ethernet",
+    "options": [
+      "Collision Sense Multiple Access",
+      "Token",
+      "CSMA/CD",
+      "Bus logico",
+      "Bus"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Quali delle seguenti proprietà sono riconducibili ad una rete Ethernet?",
+    "options": [
+      "Topologia fisica a bus",
+      "Topologia fisica a stella,topologia logica a bus",
+      "Topologia fisica a stella",
+      "Topologia ad anello",
+      "Topologia fisica a bus,topologia logica a stella"
+    ],
+    "correct": [0,1,2]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI descrive la funzione di suddividere in pacchetti il flusso dei dati prodotti da una applicazione?",
+    "options": ["Applicazione", "Data Link", "Rete", "Trasporto", "Sessione"],
+    "correct": [3]
+  },
+  {
+    "q": "Quale è la principale differenza tra i protocolli TCP ed UDP?",
+    "options": [
+      "Sono riconducibili a diversi livelli nel modello di riferimento ISO/OSI",
+      "UDP è un protocollo più lento di TCP",
+      "UDP è più usato di TCP",
+      "UDP è meno affidabile di TCP",
+      "UDP è più affidabile di TCP"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI descrive la funzione di scegliere il percorso migliore nella rete per raggiungere il nodo di destinazione?",
+    "options": ["Applicazione", "Fisico", "Rete", "Trasporto", "Data Link"],
+    "correct": [2]
+  },
+  {
+    "q": "indicare quale delle seguenti affermazioni sono applicabili ai protocolli TCP e IP",
+    "options": [
+      "TCP è più affidabile di IP",
+      "Appartengono a due diversi livelli del modello di riferimento ISO/OSI",
+      "TCP usa i servizi IP",
+      "IP è più affidabile di TCP",
+      "Appartengono allo stesso livello del modello di riferimento"
+    ],
+    "correct": [1,2]
+  },
+  {
+    "q": "Quale protocollo è relativo all'applicazione Posta Elettronica?",
+    "options": ["SMDS", "TCP", "SMTP", "SNA", "SNMP"],
+    "correct": [2]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI si fa carico della ritrasmissione di pacchetti Ethernet nel caso vengano riscontrati errori?",
+    "options": ["Data link", "Fisico", "Trasporto", "Rete", "Applicazione"],
+    "correct": [0]
+  },
+  {
+    "q": "In una rete Ethernet, quale sottolivello ristrasmette pacchetti Ethernet nel caso si verifichino errori?",
+    "options": ["LLC", "MAC", "SMS", "SMDS", "SNMP"],
+    "correct": [0]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI si fa carico della ritrasmissione di datagram IP in caso di errori trasmissivi del datagram?",
+    "options": ["Rete", "Presentation", "LLC", "MAC", "Data link"],
+    "correct": [0]
+  },
+  {
+    "q": "Indicare quali delle seguenti interfacce non appartengono al livello fisico",
+    "options": ["100baseT", "10baseFL", "X.25", "V.35", "X.21 bis"],
+    "correct": [2]
+  },
+  {
+    "q": "Indicare quali dei seguenti protocolli non appartengono al livello Network.",
+    "options": ["TCP", "IP", "X.25", "SMTP", "OSPF"],
+    "correct": [0, 3]
+  },
+  {
+    "q": "Indicare quali dei seguenti protocolli non appartengono al livello Network.",
+    "options": ["NFS", "SNMP", "RIP", "IP", "X.25"],
+    "correct": [0, 1]
+  },
+  {
+    "q": "Cosa vuol dire effettuare subnet di un indirizzo di rete IP?",
+    "options": [
+      "Accorpare insieme più indirizzi IP",
+      "Suddividere un indirizzo di rete in più sottoindirizzi",
+      "Aumentare i bit della parte rete dell’indirizzo",
+      "Diminuire i bit della parte rete dell’indirizzo",
+      "Diminuire i bit della parte host dell’indirizzo"
+    ],
+    "correct": [1,2,4]
+  },
+  {
+    "q": "Cosa vuol dire effettuare supernet di indirizzi IP?",
+    "options": [
+      "Diminuire i bit della parte rete dell’indirizzo",
+      "Aumentare i bit della parte rete dell’indirizzo",
+      "Diminuire i bit della parte host dell’indirizzo",
+      "Raggruppare più indirizzi IP in un unico indirizzo",
+      "Aumentare i bit della parte host dell’indirizzo"
+    ],
+    "correct": [0,3,4]
+  },
+  {
+    "q": "Indicare quale relazione è esatta",
+    "options": [
+      "Gli indirizzi host della rete 194.143.128.0/30 sono 194.143.128.1 – 194.143.128.2",
+      "Gli indirizzi host della rete 194.143.128.0/28 sono 194.143.128.1 – 194.143.128.14",
+      "Gli indirizzi host della rete 194.143.128.0/30 sono 194.143.128.1 – 194.143.128.30",
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.254",
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.24"
+    ],
+    "correct": [0, 1, 3]
+  },
+  {
+    "q": "Indicare quale relazione è errata.",
+    "options": [
+      "Gli indirizzi host della rete 194.143.128.0/25 sono 194.143.128.1 – 194.143.128.126",
+      "Gli indirizzi host della rete 194.143.128.0/30 sono 194.143.128.1 – 194.143.128.2",
+      "Gli indirizzi host della rete 194.143.128.0/27 sono 194.143.128.1 – 194.143.128.7",
+      "Gli indirizzi host della rete 194.143.128.0/27 sono 194.143.128.1 – 194.143.128.27",
+      "Gli indirizzi host della rete 194.143.128.0/64 sono 194.143.128.1 – 194.143.128.64"
+    ],
+    "correct": [2,3,4]
+  },
+  {
+    "q": "Indicare quale relazione è errata.",
+    "options": [
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.255 ",
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.0 – 194.143.128.254",
+      "La rete 194.143.128.0/22 comprende tutti gli indirizzi che vanno da 194.143.128.0 a 194.143.131.255",
+      "Gli indirizzi host della rete 194.143.128.0/26 sono 194.143.128.1 – 194.143.128.62",
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.254"
+    ],
+    "correct": [0,1]
+  },
+  {
+    "q": "Qual è l'indirizzo di broadcast della rete 141.250.1.0/26?",
+    "options": [
+      "141.250.1.0",
+      "141.250.1.1",
+      "141.250.1.63",
+      "141.250.1.127",
+      "141.250.1.255"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Qual è l’indirizzo di rete della rete 141.250.1.0/26?",
+    "options": [
+      "141.250.1.0",
+      "141.250.1.32",
+      "141.250.1.64",
+      "141.250.1.128",
+      "141.250.1.256"
+    ],
+    "correct": [0]
+  },
+  {
+    "q": "Quali delle seguenti applicazioni può compromettere la sicurezza delle transazioni Web, in quanto può alterare l'integrità del Server o quella del Client?",
+    "options": [
+      "L’uso di ActiveX",
+      "L’uso di JavaScript",
+      "L’uso di codice HTML",
+      "L’uso del protocollo HTTPS",
+      "La connessione a database via CGI"
+    ],
+    "correct": [0, 1, 4]
+  },
+  {
+    "q": "Quale dei seguenti fenomeni è potenzialmente più pericoloso per l'affidabilità di un servizio Internet?",
+    "options": [
+      "Denial of service",
+      "IP spoofing",
+      "ICMP",
+      "Elevato traffico",
+      "Presenza di collisioni"
+    ],
+    "correct": [0]
+  },
+  {
+    "q": "Quale dei seguenti fenomeni può potenzialmente compromettere l'affidabilità di un SERVER WWW?",
+    "options": ["Estensibilità del SERVER", "Estensibilità del CLIENT", "Elevato traffico", "Commercio elettronico", "Elevate collisioni"],
+    "correct": [0]
+  },
+  {
+    "q": "Quale dei seguenti fenomeni è potenzialmente più pericoloso per la sicurezza dei servizi Internet presenti in una LAN aziendale?",
+    "options": [
+      "Elevato numero di pacchetti broadcast rilevati",
+      "Un Trojan Horse presente su un host della rete",
+      "Elevate collisioni",
+      "Elevato traffico",
+      "Interfaccia del router difettosa"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Che cosa è più opportuno fare in caso di degradate prestazioni di una rete Ethernet 10baseT?",
+    "options": [
+      "Dividere la rete a livello 3 OSI,mediante uso di subnet",
+      "Introdurre uno switch a livello 2 OSI",
+      "Cambiare l’apparato fisico dell’HUB",
+      "Suddividere la connessioni in più HUB",
+      "Cambiare modello di HUB"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Cosa è più corretto fare in caso di prestazioni degradate di una LAN Ethernet?",
+    "options": [
+      "Controllare l’impianto elettrico",
+      "Controllare l’impianto di condizionamento",
+      "Controllare l’impianto idraulico",
+      "Controllare lo stato dell’HUB",
+      "Controllare la versione software del PC"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Se un utente ha ogni tanto problemi di connessione via modem, a quale verifica daresti la priorità?",
+    "options": [
+      "Prestazioni della linea telefonica",
+      "Versione del software di rete del PC",
+      "Versione del sistema operativo del PC",
+      "Numero di linee in ricezione dell’Internet Service Provider",
+      "Tipo di applicazioni usate dall’utente"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Quale delle seguenti situazioni secondo te genera più probabilmente problemi nella connessione alla rete Internet via modem?",
+    "options": [
+      "Modem di basso costo",
+      "Uso di IRC",
+      "PC di basso costo",
+      "Infrastruttura dell’ISP tarata su 1 linea in ricezione ogni 200 utenti definiti",
+      "Infrastruttura dell’ISP tarata su 1 linea in ricezione ogni 10 utenti definiti"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Quale dei servizi Internet seguenti potenzialmente può pesare di più sul consumo della banda di connessione all'ISP?",
+    "options": ["ICMP", "DNS", "FTP", "Telnet", "SNMP"],
+    "correct": [2]
+  },
+  {
+    "q": "Quale dei seguenti servizi Internet richiede costante controllo da parte dell'Amministratore, considerato il suo ruolo strategico?",
+    "options": ["Telnet", "SMTP", "FTP", "NTP", "SSH"],
+    "correct": [1]
+  },
+  {
+    "q": "Quale dei seguenti servizi Internet richiede maggiore supervisione ed attenzione da parte dell'Amministratore?",
+    "options": ["Telnet", "FTP", "NIS", "SNMP"],
+    "correct": [2]
+  },
+  {
+    "q": "Quale dei seguenti file deve essere monitorato continuamente dall'Amministratore?",
+    "options": ["/etc/services", "/etc/named.conf", "/var/log/daemon.log", "/bin/ping", "/bin/traceroute"],
+    "correct": [2]
+  },
+  {
+    "q": "Quale dei seguenti comandi è più efficace per effettuare la diagnosi veloce di problemi di connessione?",
+    "options": ["Pine", "Elm", "Traceroute", "Cat"],
+    "correct": [2]
+  },
+  {
+    "q": "Quale delle seguenti operazioni è più adeguata per effettuare la diagnosi nel caso di un PC appena configurato che non si collega?",
+    "options": [
+      "Configurazione indirizzo IP",
+      "Configurazione subnet mask",
+      "Stato della connessione del cavo",
+      "Memoria RAM libera",
+      "Spazio disco libero"
+    ],
+    "correct": [0,1,2]
+  },
+  {
+    "q": "Quale dei seguenti files non ha nulla a che fare con il servizio DNS?",
+    "options": ["/usr/sbin/named", "/etc/group", "/etc/named.conf", "/etc/passwd", "/etc/resolv.conf"],
+    "correct": [1, 3]
+  },
+  {
+    "q": "Quali delle seguenti azioni sono effettuate da un Firewall?",
+    "options": [
+      "IP spoofing",
+      "Anonimizzazione",
+      "Privacy",
+      "Controllo di accesso in base al Socket",
+      "Denial of service"
+    ],
+    "correct": [1, 3]
+  },
+  {
+    "q": "Indicare il tipo di tecnologia di crittografia usata da DES",
+    "options": [
+      "Chiave pubblica",
+      "Doppia chiave: chiave pubblica e chiave privata",
+      "A doppia coppia di chiavi pubblica e privata",
+      "Una sola chiave comune",
+      "Due chiavi private distinte"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Indicare lo schema di crittografia usato nell'algoritmo RSA",
+    "options": [
+      "Ogni utente o applicazione ha una chiave privata",
+      "Ogni utente o applicazione ha una doppia chiave (pubblica e privata)",
+      "Unica chiave",
+      "Unica chiave generata dinamicamente",
+      "Doppia chiave"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Indicare quale tra i seguenti è un metodo di accesso deterministico",
+    "options": ["Doppia chiave", "CSMA", "CSMA/CD", "DDA", "Token ring", "HSA"],
+    "correct": [4]
+  },
+  {
+    "q": "Indicare quale tra i seguenti non è un metodo di accesso deterministico",
+    "options": ["CSMA/CD", "Token bus", "CSMA", "Token ring"],
+    "correct": [0, 2]
+  },
+  {
+    "q": "Indicare quale tra le seguenti è un'interfaccia fisica che usa un mezzo trasmissivo con proprietà fisiche spiccatamente diverse dalle altre interfaccie elencate",
+    "options": ["10baseT", "10base2", "10base5", "100baseT", "100baseFL"],
+    "correct": [4]
+  },
+  {
+    "q": "Indicare quale tra i seguenti livelli del modello di riferimento ISO/OSI non è presente nel modello del TCP/IP",
+    "options": ["Fisico", "Data link", "Rete", "Sessione", "Applicazione"],
+    "correct": [3]
+  },
+  {
+    "q": "Indicare quale tra i seguenti livelli del modello di riferimento ISO/OSI non è riscontrabile nel modello del TCP/IP",
+    "options": ["Applicazione", "Fisico", "Presentation", "Data link", "Rete"],
+    "correct": [2]
+  },
+  {
+    "q": "Quali tra i seguenti protocolli di rete non ha componenti al livello RETE del modello di riferimento ISO/OSI",
+    "options": ["ATM", "Frame relay", "X.25"],
+    "correct": [1]
+  },
+  {
+    "q": "Quale tra le seguenti applicazioni induce un maggior consumo di banda, in reti con elevato numero di utenti?",
+    "options": ["RIP", "OSPF", "Telnet", "FTP", "DNS"],
+    "correct": [3]
+  },
+  {
+    "q": "Potendo gestire la priorità dei seguenti protocolli, a quali assegnereste alte priorità?",
+    "options": ["Telnet", "DNS", "FTP", "SSH", "NNTP"],
+    "correct": [0, 1, 3]
+  },
+  {
+    "q": "Potendo gestire la priorità dei seguenti protocolli, a quali assegnereste basse priorità?",
+    "options": ["FTP", "Telnet", "DNS", "HTTP", "NNTP"],
+    "correct": [0, 4]
+  },
+  {
+    "q": "50 -- In che anno può essere fissata secondo te la nascita dei concetti legati alla rete Internet?",
+    "options": ["1948", "1953", "1962", "1970", "1982"],
+    "correct": [2]
+  },
+  {
+    "q": "In che anno può essere collocato l'inizio del progetto DARPA?",
+    "options": ["1952", "1972", "1982", "1962"],
+    "correct": [3]
+  },
+  {
+    "q": "In che anno è apparso il primo articolo sul Packet Switching?",
+    "options": ["1971", "1961", "1951", "1941", "1981"],
+    "correct": [1]
+  },
+  {
+    "q": "Quando sono stati messi in rete i primi due computer?",
+    "options": ["1965", "1970", "1963", "1968"],
+    "correct": [0]
+  },
+  {
+    "q": "Quando è stata completata la specifica della rete ARPANET?",
+    "options": ["1958", "1968", "1963", "1978"],
+    "correct": [1]
+  },
+  {
+    "q": "In quale anno viene inventata la posta elettronica?",
+    "options": ["1973", "1969", "1975", "1977", "1971"],
+    "correct": [0]
+  },
+  {
+    "q": "Quale è stato il primo nodo della rete ARPANET?",
+    "options": [
+      "AT&T Laboratories",
+      "SRI",
+      "MIT",
+      "UCLA Measurament Center",
+      "Stanford University"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Chi è ritenuto essere l'inventore della posta elettronica?",
+    "options": [
+      "Dennis Jennings",
+      "G. Freeman e Ira Fuchs",
+      "Paul Mockapetris",
+      "Bob Metcalfe",
+      "Vint Cerf e Bob Kahn"
+    ],
+    "correct": [4]
+  },
+  {
+    "q": "Chi è il creatore della rete NSFNET?",
+    "options": [
+      "Ira Fuchs",
+      "Paul Mockapetris",
+      "Vint Cerf",
+      "Dennis Jennings"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "In quali anni è stata amministrata da enti pubblici l'infrastruttura di NSFNET?",
+    "options": [
+      "1970-1990",
+      "1980-1990",
+      "1980-1995",
+      "1980-1990",
+      "1985-1995"
+    ],
+    "correct": [4]
+  },
+  {
+    "q": "Chi ha creato il Domain Name System?",
+    "options": [
+      "Paul Mockapetris",
+      "Vint Cerf",
+      "Bob Kahn",
+      "Dennis Jennings",
+      "Jonathan B. Postel"
+    ],
+    "correct": [0]
+  },
+  {
+    "q": "In che anno Network Solutions ha registrato il milionesimo dominio internet (bonnyview.com)?",
+    "options": ["1982", "1987", "1992", "1997", "1999"],
+    "correct": [3]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera",
+    "options": [
+      "Il protocollo SMTP è definito principalmente nell’RFC 822",
+      "Il protocollo NFS serve a condividere tabelle di sistema",
+      "Il protocollo SNMP consente di gestire risorse di rete",
+      "La libreria MIB è usata da NFS",
+      "Il protocollo NIS serve per condividere filesystem remoti"
+    ],
+    "correct": [0, 2]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera",
+    "options": [
+      "SNMP usa la libreria MIB",
+      "In SNMP versione 2 la sicurezza è ben curata",
+      "NFS serve per condividere filesystem remoti",
+      "SNMP non è basato su un’architettura client-server",
+      "NIS serve per condividere tabelle di sistema nel sistema operativo UNIX"
+    ],
+    "correct": [0, 2, 4]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera",
+    "options": [
+      "Ethernet è uno standard de-facto",
+      "Token Ring è uno standard de-facto",
+      "IEEE 802.4 è lo standard de-jure corrispondente allo standard de-facto Ethernet",
+      "IEEE 802.6 è lo standard de-jure corrispondente alla definizione dei protocolli per le MAN",
+      "Token Ring è uno standard de-jure emanato da ITU"
+    ],
+    "correct": [0, 1, 3]
+  }
+];
+
+    const form = document.getElementById("quizForm");
+    let currentQuestion = 0;
+    let score = 0;
+
+    let notAnswered = [];
+    for(let i = 0; i < questions.length; i++) {
+      notAnswered.push(i);
+    }
+
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = `question${i}`;
+
+      const title = document.createElement("p");
+      title.textContent = `${i + 1}. ${q.q}`;
+      div.appendChild(title);
+
+      const answersDiv = document.createElement("div");
+      answersDiv.className = "answers";
+      q.options.forEach((opt, idx) => {
+        const label = document.createElement("label");
+        label.className = "answer-option";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = `q${i}`;
+        input.value = idx;
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(idx + " - " + opt));
+        answersDiv.appendChild(label);
+      });
+      div.appendChild(answersDiv);
+
+      const feedback = document.createElement("div");
+      feedback.id = `feedback${i}`;
+      feedback.className = "feedback";
+      div.appendChild(feedback);
+
+      form.appendChild(div);
+    });
+
+    function showQuestion(index) {
+      document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+      const qDiv = document.getElementById(`question${index}`);
+
+      if (notAnswered.length == 0) {
+        showResult();
+      } else {
+        qDiv.style.display = 'block';
+      }
+      console.log("Current question: " + currentQuestion);
+      notAnswered.splice(notAnswered.indexOf(currentQuestion), 1);
+
+    }
+
+    function confirmAnswer(event) {
+      event.preventDefault();
+      const selected = document.querySelectorAll(`input[name=q${currentQuestion}]:checked`);
+      if (selected.length === 0) {
+        alert("Seleziona almeno una risposta per confermare.");
+        return;
+      }
+
+      const selectedValues = Array.from(selected).map(el => parseInt(el.value));
+      const correctAnswers = questions[currentQuestion].correct;
+      const feedbackDiv = document.getElementById(`feedback${currentQuestion}`);
+      const nextBtn = document.querySelector('.next-btn');
+
+      const isCorrect =
+        selectedValues.length === correctAnswers.length &&
+        selectedValues.every(val => correctAnswers.includes(val)) &&
+        correctAnswers.every(val => selectedValues.includes(val));
+
+      if (isCorrect) {
+        feedbackDiv.textContent = "Risposta corretta!";
+        feedbackDiv.className = "feedback correct";
+        score++;
+      } else {
+        feedbackDiv.innerHTML = `Risposta sbagliata. Le risposte corrette sono: <strong>${correctAnswers}</strong>`;
+        feedbackDiv.className = "feedback wrong";
+      }
+
+      nextBtn.style.display = 'inline-block';
+      document.querySelector('.confirm-btn').disabled = true;
+    }
+
+    function nextQuestion(event) {
+      event.preventDefault();
+      currentQuestion = notAnswered[Math.floor(Math.random() * notAnswered.length)];
+
+      document.querySelector('.confirm-btn').disabled = false;
+      document.querySelector('.next-btn').style.display = 'none';
+      showQuestion(currentQuestion);
+    }
+
+    function showResult() {
+      document.querySelector('.confirm-btn').style.display = 'none';
+      document.querySelector('.next-btn').style.display = 'none';
+      document.getElementById("result").textContent = `Hai totalizzato ${score} su ${questions.length} risposte corrette.`;
+    }
+
+    // Start the quiz
+    showQuestion(currentQuestion);
+  </script>
+</body>
+</html>
