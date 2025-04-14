@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2r-Quiz Architettura Reti</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f4f4f4; }
+    .question { margin-bottom: 1.5rem; background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); display: none; }
+    .answers { display: grid; gap: 0.75rem; margin-top: 1rem; }
+    .answer-option { background: #e9ecef; padding: 1rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: background 0.3s; }
+    .answer-option:hover { background: #d1dce5; }
+    .answer-option input[type="checkbox"] { transform: scale(1.5); }
+    .submit-btn, .next-btn, .confirm-btn { margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+    .result, .feedback { font-weight: bold; margin-top: 1rem; }
+    .correct { color: green; }
+    .wrong { color: red; }
+  </style>
+</head>
+<body>
+  <form id="quizForm"></form>
+  <button class="confirm-btn" onclick="confirmAnswer(event)">Conferma Risposta</button>
+  <button class="next-btn" onclick="nextQuestion(event)" style="display:none;">Avanti</button>
+  <div id="result" class="result"></div>
+  <div id="progress" class="progress">1/45</div>
+  <h1>random mibbbbbn reti 65-101</h1>
+  <script>
+
+const questions =[
+{
+    "q": "Indicare quale delle seguenti affermazioni è falsa",
+    "options": [
+      "Il livello Presentazione è presente sia nel modello di riferimento ISO/OSI che in quello del TCP/IP",
+      "Un router si comporta come un Intermediate System (IS) del modello di riferimento ISO/OSI",
+      "Il livello Trasporto è presente sia nel modello di riferimento ISO/OSI che in quello TCP/IP",
+      "Il livello Presentazione usa i servizi del livello Trasporto",
+      "Il livello Data Link si occupa della comunicazione tra due nodi adiacenti della rete"
+    ],
+    "correct": [0,3]
+  },
+  {
+    "q": "Indicare quale delle seguenti sigle non indica una interfaccia definita a livello fisico",
+    "options": ["V.35", "X.25", "RS232", "SONET/SDH", "X.28"],
+    "correct": [1, 4]
+  },
+  {
+    "q": "Indicare quale delle seguenti sigle non indica un protocollo definito a livello Data Link",
+    "options": ["DLCP", "X.25", "BSC", "X.75", "HDLC"],
+    "correct": [1, 3]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni non è appropriata per il livello Trasporto",
+    "options": [
+      "Verifica la comunicazione tra i due nodi che l’applicazione fa dialogare",
+      "È il primo livello end-to-end (dal basso verso l’alto della pila ISO/OSI)",
+      "È responsabile per la garanzia che il trasferimento di informazioni avvenga correttamente",
+      "È responsabile della scelta del cammino da intraprendere per effettuare la comunicazione",
+      "È responsabile della compressione/decompressione dei dati"
+    ],
+    "correct": [3, 4]
+  },
+  {
+    "q": "Quale dei seguenti mezzi trasmissivi è migliore considerando le diverse proprietà, compresa l'economicità?",
+    "options": [
+      "Cavo coassiale del tipo Thin Ethernet",
+      "Cavo coassiale del tipo Thick Ethernet",
+      "Cavo STP",
+      "Doppino in rame",
+      "Cavo UTP"
+    ],
+    "correct": [4]
+  },
+  {
+    "q": "Quale mezzo trasmissivo fornisce le migliori prestazioni e consente di raggiungere le maggiori distanze?",
+    "options": [
+      "Cavo coax Thin Ethernet",
+      "Cavo coax Thick Ethernet",
+      "Cavo STP",
+      "Fibra ottica",
+      "Cavo UTP"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Quale delle seguenti definizioni non sono appropriate per la fibra ottica?",
+    "options": [
+      "Un tipo è chiamata fibra Multimodale Stepped Index",
+      "Un tipo è chiamata fibra Multimodale Graded Index",
+      "Un tipo è chiamata Monomodale",
+      "La distanza massima che si può raggiungere senza mettere ripetitori di segnale è di 500m",
+      "L’angolo di riflessione nella fibra è maggiore dell’angolo di incidenza"
+    ],
+    "correct": [3, 4]
+  },
+  {
+    "q": "Indicare quale affermazione è propria della rete Ethernet",
+    "options": [
+      "È un metodo di accesso deterministico",
+      "È uno standard de-jure",
+      "È un metodo di accesso non deterministico",
+      "È uno standard de-facto",
+      "La trasmissione avviene in banda larga"
+    ],
+    "correct": [2, 3]
+  },
+  {
+    "q": "Indicare quale delle seguenti proprietà è propria della rete Ethernet",
+    "options": [
+      "Usa una codifica del segnale di tipo Manchester",
+      "Il formato dei pacchetti Ethernet e IEEE 802.3 è simile: differisce solo per un campo nell’intestazione ed uno nella coda del messaggio",
+      "Ha una topologia ad anello",
+      "Usa il metodo di accesso CSMA",
+      "Gli HUB implementano una topologia logica a anello"
+    ],
+    "correct": [0, 1]
+  },
+  {
+    "q": "Quale delle seguenti applicazioni ha bisogno dell'implementazione del QoS (Quality of Service)?",
+    "options": ["E-mail", "FTP", "Teleconferenza", "NIS", "HTTP"],
+    "correct": [2]
+  },
+  {
+    "q": "Quali tra le seguenti applicazioni ha caratteristiche isocrone?",
+    "options": ["FTP", "SMTP", "SNMP", "Videoconferenza", "NFS"],
+    "correct": [3]
+  },
+  {
+    "q": "Quali tra i seguenti protocolli non appartiene alla definizione di X.25?",
+    "options": ["X.75", "X.28", "X.29", "X.400", "X.3"],
+    "correct": [3]
+  },
+  {
+    "q": "Indicare quale dispositivo è estraneo al protocollo Frame Relay",
+    "options": ["FRAD", "Endpoint", "T1/E1 multiplexer", "HUB", "Switch"],
+    "correct": [3]
+  },
+  {
+    "q": "Indicare quale delle proprietà o caratteristiche seguenti non è riconducibile al protocollo Frame Relay",
+    "options": [
+      "Consente di risparmiare sugli apparati utente",
+      "Ha costi ridotti rispetto ai CDN",
+      "Consente velocità maggiori rispetto ai CDN",
+      "Consente una stabilità maggiore delle connessioni",
+      "Consente a bassissimo costo di personalizzare il servizio in base alle esigenze dell’utente"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata a proposito del protocollo Frame Relay",
+    "options": [
+      "Consente il trasporto integrato di dati multimediali",
+      "Consente il trasporto di diversi protocolli applicativi",
+      "Offre una maggior qualità del servizio rispetto ai CDN",
+      "In reti complesse ha tempi di risposta peggiori rispetto ai CDN",
+      "Offre una maggior resistenza ai guasti rispetto ai CDN"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata a proposito del protocollo Frame Relay",
+    "options": [
+      "Ha prestazioni superiori a X.25",
+      "È un protocollo a livello 3 del modello di riferimento ISO/OSI",
+      "È disegnato per interconnettere router remoti in modo efficiente",
+      "Il controllo dell’errore è limitato essenzialmente ai nodi periferici (edge) della rete",
+      "È stato sviluppato presso i Bell Labs, come parte della specifica ISDN"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni non è appropriata a proposito del protocollo Frame Relay",
+    "options": [
+      "Presenta la caratteristica di una forte scalabilità",
+      "È un protocollo connectionless",
+      "Due stazioni FR possono attivare sia connessioni permanenti che temporanee",
+      "Supporta velocità dai 64Kbps ai 2Mbps",
+      "La correzione dell’errore ha un costo molto basso ed è molto limitata"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Quali delle seguenti proprietà determina le prestazioni della rete Frame Relay?",
+    "options": ["CIDR", "RER", "EIR", "CIR", "DLCI"],
+    "correct": [3]
+  },
+  {
+    "q": "Quale dei seguenti campi dell'header di una frame ne determina la possibilità di essere scartata dagli switch di una rete Frame Relay, se attivo?",
+    "options": ["FCS", "DLCI", "BECN", "DE", "FECN"],
+    "correct": [3]
+  },
+  {
+    "q": "Quale tra i seguenti può essere utilizzato per realizzare sia LAN che MAN e WAN?",
+    "options": ["ATM", "X.25", "SNA", "HDLC"],
+    "correct": [0]
+  },
+  {
+    "q": "Qual è il range di velocità supportato da ATM (in bps)?",
+    "options": ["64K-2M", "25M-2.5G", "2M-622M", "2M-25M", "64K-25M"],
+    "correct": [1]
+  },
+  {
+    "q": "Indicare l'affermazione non appropriata nel caso del protocollo ATM",
+    "options": [
+      "È un protocollo connection oriented",
+      "Ogni stazione ha un proprio indirizzo ATM",
+      "La comunicazione tra nodi non attraversa Intermediate System",
+      "Due nodi della rete, a qualsiasi distanza siano, comunicano direttamente",
+      "Le prestazioni aggregate della rete non dipendono dal numero di nodi connessi che comunicano"
+    ],
+    "correct": [4]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata nel caso del protocollo ATM",
+    "options": [
+      "Una LAN ATM presenta delle possibilità di crescita illimitate",
+      "La tecnologia ATM prescinde dalla modalità trasmissiva",
+      "Le prestazioni della rete non dipendono dall’aumentare dei nodi che comunicano",
+      "ATM presenta una latenza della rete ridotta rispetto alle altre tecnologie",
+      "Il protocollo ATM massimizza il throughput della rete"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Indicare quale dei seguenti concetti è estraneo al protocollo ATM",
+    "options": ["CIR", "AAL", "UNI", "NNI", "QoS"],
+    "correct": [0]
+  },
+  {
+    "q": "A proposito di ATM, quale delle seguenti affermazioni è errata?",
+    "options": [
+      "Il servizio CBR è adatto alla trasmissione dei dati",
+      "Il servizio UBR è adatto alla trasmissione dei dati",
+      "Il servizio VBR è adatto alla trasmissione dei dati",
+      "AAL5 non è adatto ad applicazioni TCP/IP",
+      "Applicazioni di telefonia numerica necessitano del servizio CBR"
+    ],
+    "correct": [0, 3]
+  },
+  {
+    "q": "Quale protocollo Internet è collocabile al livello 3 del modello di riferimento ISO/OSI?",
+    "options": ["TCP", "IP", "ARP", "UDP", "SMTP"],
+    "correct": [1]
+  },
+  {
+    "q": "Indicare quale affermazione è corretta, a proposito degli indirizzi IP seguenti",
+    "options": [
+      "Gli indirizzi IP di classe A sono quelli che hanno come primo byte un numero minore di 127",
+      "Gli indirizzi IP di classe C hanno come subnet mask associata il valore 255.255.255.0",
+      "Gli indirizzi IP di classe B hanno il primo byte compreso o uguale tra i valori 128 e 191",
+      "Gli indirizzi di classe C hanno il primo byte inferiore o uguale a 223",
+      "Il numero di bit della parte host di un indirizzo di classe A è 24"
+    ],
+    "correct": [1, 2, 4]
+  },
+  {
+    "q": "Quale delle seguenti affermazioni è esatta?",
+    "options": [
+      "L’indirizzo IP identifica la connessione dell’host alla rete",
+      "L’indirizzo IP identifica l’host",
+      "L’indirizzo Ethernet di un host del quale è noto l’indirizzo IP è fornito dinamicamente dal protocollo ARP",
+      "L’indirizzo Ethernet di un host del quale è noto l’indirizzo IP è fornito dinamicamente dal protocollo RARP",
+      "La richiesta ARP avviene con un pacchetto di tipo broadcast"
+    ],
+    "correct": [0, 2, 4]
+  },
+  {
+    "q": "A proposito del protocollo ICMP, quali delle seguenti affermazioni è errata?",
+    "options": [
+      "Il codice 0 è associato al campo echo reply",
+      "Il codice 8 è associato al campo echo request",
+      "Un pacchetto ICMP non può riportare anomalie nel traffico IP",
+      "Un pacchetto ICMP può essere usato per verificare la raggiungibilità di un nodo",
+      "Un pacchetto ICMP non può essere usato per conoscere la subnet mask che un nodo usa"
+    ],
+    "correct": [0, 1, 3]
+  },
+  {
+    "q": "Quale affermazione è corretta?",
+    "options": [
+      "Il protocollo RIP basa il calcolo del miglior percorso in base alla distanza in termini di nodi intermedi",
+      "Il protocollo RIP basa il calcolo del miglior percorso in base alla velocità dei collegamenti",
+      "Il protocollo OSPF basa il calcolo del miglior percorso in base alla distanza in termini di nodi intermedi",
+      "Un host pone come indirizzo fisico del destinatario quello dell’host nel caso in cui appartenga alla stessa rete IP",
+      "Un router IP si comporta come un Intermediate System del modello di riferimento ISO/OSI"
+    ],
+    "correct": [0, 3, 4]
+  },
+  {
+    "q": "Quale caratteristica è estranea alle proprietà di un algoritmo di routing?",
+    "options": [
+      "Semplice e con basso overhead",
+      "Ottimale",
+      "Robusto e stabile",
+      "Flessibile",
+      "Statico"
+    ],
+    "correct": [4]
+  },
+  {
+    "q": "Quale tra i seguenti protocolli non è un protocollo di routing Interno ad Autonomous System?",
+    "options": ["RIP", "OSPF", "IGRP", "BGP", "ISIS"],
+    "correct": [3]
+  },
+  {
+    "q": "Quale caratteristica non è appropriata al protocollo di routing OSPF?",
+    "options": [
+      "Bilancia il carico su diversi link",
+      "È gerarchico",
+      "Ha circa lo stesso carico computazionale del protocollo RIP",
+      "È un protocollo EGP",
+      "Usa un algoritmo Vettore – Distanza"
+    ],
+    "correct": [2, 3, 4]
+  },
+  {
+    "q": "Quale affermazione è corretta?",
+    "options": [
+      "Gli HUB sono classificati al livello 2 del modello di riferimento ISO/OSI",
+      "Gli Switch sono classificati al livello 2 del modello di riferimento ISO/OSI",
+      "Gli Switch che eseguono protocolli di routing dinamici sono classificati al livello 3 del modello di ISO/OSI",
+      "Gli HUB sono classificati al livello 3 del modello di riferimento ISO/OSI",
+      "Gli Switch sono classificati al livello 1 del modello di riferimento ISO/OSI"
+    ],
+    "correct": [0, 1, 2]
+  },
+  {
+    "q": "Su quali criteri un router instrada i pacchetti?",
+    "options": [
+      "Indirizzo IP dell’host di destinazione",
+      "Indirizzo IP della rete di destinazione",
+      "Indirizzo IP della rete mittente",
+      "Indirizzo IP dell’host mittente"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Quale indirizzo di destinazione si usa da parte di un host mittente?",
+    "options": [
+      "L’indirizzo dell’host di destinazione se appartenente alla stessa rete",
+      "Sempre l’indirizzo dell’Intermediate System",
+      "L’indirizzo dell’Intermediate System se l’host appartiene ad una rete diversa",
+      "Sempre l’indirizzo dell’host di destinazione"
+    ],
+    "correct": [0, 2]
+  },
+  {
+    "q": "Indicare quale risposta è vera",
+    "options": [
+      "Un router IP rappresenta un Intermediate System ISO/OSI",
+      "Un router IP non rappresenta un Intermediate System ISO/OSI",
+      "Un router deve avere almeno due interfacce di rete",
+      "Un router può avere più interfacce"
+    ],
+    "correct": [0, 2]
+  }
+  ];
+    const form = document.getElementById("quizForm");
+    let currentQuestion = 0;
+    let score = 0;
+
+    let notAnswered = [];
+    for(let i = 0; i < questions.length; i++) {
+      notAnswered.push(i);
+    }
+
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = `question${i}`;
+
+      const title = document.createElement("p");
+      title.textContent = `${i + 1 + 64}. ${q.q}`;
+      div.appendChild(title);
+
+      const answersDiv = document.createElement("div");
+      answersDiv.className = "answers";
+      q.options.forEach((opt, idx) => {
+        const label = document.createElement("label");
+        label.className = "answer-option";
+
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = `q${i}`;
+        input.value = idx;
+
+        const idxSpan = document.createElement("span");
+        idxSpan.textContent = ` - ${idx}`;
+        idxSpan.style.fontSize = "0.8rem";
+        idxSpan.style.color = "#888";
+
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(opt));
+        label.appendChild(idxSpan); // Append the smaller idx text
+        answersDiv.appendChild(label);
+      });
+      div.appendChild(answersDiv);
+      shuffleQuestions(answersDiv);
+
+      const feedback = document.createElement("div");
+      feedback.id = `feedback${i}`;
+      feedback.className = "feedback";
+      div.appendChild(feedback);
+
+      form.appendChild(div);
+    });
+
+
+    function shuffleQuestions(questionToShuffle) {
+      const questionDivs = Array.from(questionToShuffle.children); // Get all question divs as an array
+
+      // Shuffle the array using Fisher-Yates algorithm
+      for (let i = questionDivs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questionDivs[i], questionDivs[j]] = [questionDivs[j], questionDivs[i]];
+      }
+
+      // Append the shuffled divs back to the form
+      questionDivs.forEach(div => questionToShuffle.appendChild(div));
+    }
+
+    function showQuestion(index) {
+      document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+      const qDiv = document.getElementById(`question${index}`);
+      document.getElementById("progress").textContent = `progresso: ${questions.length - notAnswered.length} / ${questions.length}`;
+      if (notAnswered.length == 0) {
+        showResult();
+      } else {
+        qDiv.style.display = 'block';
+      }
+      console.log("Current question: " + currentQuestion);
+      notAnswered.splice(notAnswered.indexOf(currentQuestion), 1);
+
+    }
+
+    function confirmAnswer(event) {
+      event.preventDefault();
+      const selected = document.querySelectorAll(`input[name=q${currentQuestion}]:checked`);
+      if (selected.length === 0) {
+        alert("Seleziona almeno una risposta per confermare.");
+        return;
+      }
+
+      const selectedValues = Array.from(selected).map(el => parseInt(el.value));
+      const correctAnswers = questions[currentQuestion].correct;
+      const feedbackDiv = document.getElementById(`feedback${currentQuestion}`);
+      const nextBtn = document.querySelector('.next-btn');
+
+      const isCorrect =
+        selectedValues.length === correctAnswers.length &&
+        selectedValues.every(val => correctAnswers.includes(val));
+        
+      console.log("selectedValues.every(val => correctAnswers.includes(val)): " + selectedValues);
+      console.log("selectedValues.length === correctAnswers.length: " + (selectedValues.length === correctAnswers.length));
+      if (isCorrect) {
+        feedbackDiv.textContent = "Risposta corretta!";
+        feedbackDiv.className = "feedback correct";
+        score++;
+      } else {
+        feedbackDiv.innerHTML = `Risposta sbagliata. Le risposte corrette sono: <strong>${correctAnswers}</strong>`;
+        feedbackDiv.className = "feedback wrong";
+      }
+
+      nextBtn.style.display = 'inline-block';
+      document.querySelector('.confirm-btn').disabled = true;
+    }
+
+    function nextQuestion(event) {
+      event.preventDefault();
+      currentQuestion = notAnswered[Math.floor(Math.random() * notAnswered.length)];
+
+      document.querySelector('.confirm-btn').disabled = false;
+      document.querySelector('.next-btn').style.display = 'none';
+      showQuestion(currentQuestion);
+    }
+
+    function showResult() {
+      document.querySelector('.confirm-btn').style.display = 'none';
+      document.querySelector('.next-btn').style.display = 'none';
+      document.getElementById("result").textContent = `Hai totalizzato ${score} su ${questions.length} risposte corrette.`;
+    }
+
+    // Start the quiz
+    showQuestion(currentQuestion);
+  </script>
+</body>
+</html>

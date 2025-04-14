@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3r-Quiz Architettura Reti</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f4f4f4; }
+    .question { margin-bottom: 1.5rem; background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); display: none; }
+    .answers { display: grid; gap: 0.75rem; margin-top: 1rem; }
+    .answer-option { background: #e9ecef; padding: 1rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: background 0.3s; }
+    .answer-option:hover { background: #d1dce5; }
+    .answer-option input[type="checkbox"] { transform: scale(1.5); }
+    .submit-btn, .next-btn, .confirm-btn { margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+    .result, .feedback { font-weight: bold; margin-top: 1rem; }
+    .correct { color: green; }
+    .wrong { color: red; }
+  </style>
+</head>
+<body>
+  <form id="quizForm"></form>
+  <button class="confirm-btn" onclick="confirmAnswer(event)">Conferma Risposta</button>
+  <button class="next-btn" onclick="nextQuestion(event)" style="display:none;">Avanti</button>
+  <div id="result" class="result"></div>
+  <div id="progress" class="progress">1/45</div>
+  <h1>random mibbbbbn reti 102-147</h1>
+  <script>
+
+    const questions =[
+    {
+    "q": "Quale tra i seguenti protocolli di routing è un protocollo EGP?",
+    "options": ["IBGP", "IGRP", "OSPF", "BGP"],
+    "correct": [3]
+  },
+  {
+    "q": "Quale proprietà non è riferibile al protocollo RIP versione 1?",
+    "options": [
+      "È un protocollo EGP",
+      "È un protocollo IGP",
+      "Usa un algoritmo Vettore – Distanza",
+      "Non supporta subnets variabili"
+    ],
+    "correct": [0]
+  },
+  {
+    "q": "Quale protocollo è estraneo alla posta elettronica",
+    "options": ["IMAP", "POP3", "SNMP", "SMTP"],
+    "correct": [2]
+  },
+  {
+    "q": "Indicare il significato del campo TTL nell'header del datagram IP",
+    "options": [
+      "Indica il tempo di vita del datagram nella rete locale",
+      "Indica il tempo di vita del datagram nell’Internet",
+      "Evita fenomeni di saturazione della rete Internet per effetti dovuti ad errori",
+      "Serve a ridurre il traffico della rete locale"
+    ],
+    "correct": [1, 2]
+  },
+  {
+    "q": "Quale è il significato del campo Protocol nell'header del datagram IP?",
+    "options": [
+      "Indica il protocollo applicativo a cui è destinato il datagram",
+      "Indica il protocollo che ha generato la porzione di informazione",
+      "Consente all’IP di consegnare l’informazione in modo corretto",
+      "Non ha utilizzi pratici"
+    ],
+    "correct": [1, 2]
+  },
+  {
+    "q": "Qual è il significato del campo Opzioni IP nell'header del datagram IP?",
+    "options": [
+      "Serve per funzioni di test",
+      "Non ha utilizzi pratici",
+      "Serve per prevenire congestioni della rete",
+      "Serve per funzioni di debug"
+    ],
+    "correct": [0, 3]
+  },
+  {
+    "q": "Indicare la classe della rete di un indirizzo che ha come primo byte 224",
+    "options": ["Classe A", "Classe B", "Classe C", "Classe D"],
+    "correct": [3]
+  },
+  {
+    "q": "Indicare la classe della rete di un indirizzo che ha come primo byte 195",
+    "options": ["Classe A", "Classe B", "Classe C", "Classe D"],
+    "correct": [2]
+  },
+  {
+    "q": "Indicare la classe della rete di un indirizzo che ha come primo byte 95",
+    "options": ["Classe A", "Classe B", "Classe C", "Classe D"],
+    "correct": [0]
+  },
+  {
+    "q": "Un host con due interfacce di rete:",
+    "options": [
+      "Deve avere un solo indirizzo IP per evitare problemi",
+      "Deve avere due indirizzi IP",
+      "È indifferente se ha uno solo indirizzo o se ne ha due"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Quali tra i seguenti sono indirizzi riservati?",
+    "options": ["0.0.0.0", "127.0.0.1", "192.0.0.1", "0.0.0.1"],
+    "correct": [0, 1]
+  },
+  {
+    "q": "Qual è il significato del codice 11 di un pacchetto ICMP?",
+    "options": [
+      "Address Mask Reply",
+      "Address Mask Request",
+      "Time Exceeded for a datagram"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Qual è l'RFC che definisce IP multicasting?",
+    "options": ["RFC 822", "RFC 966", "RFC 1157"],
+    "correct": [1]
+  },
+  {
+    "q": "L'RFC che definisce SNMP version 3 è:",
+    "options": ["RFC 2200", "RFC 1122", "RFC 1812"],
+    "correct": [0]
+  },
+  {
+    "q": "Il record A consente di definire al DNS:",
+    "options": [
+      "L’indirizzo IP associato ad un nome di host",
+      "Il gestore della posta elettronica di un dominio",
+      "Il Nameserver associato ad un dominio Internet"
+    ],
+    "correct": [0]
+  },
+  {
+    "q": "Quali tra i seguenti sono campi definiti nell'RFC822?",
+    "options": [
+      "Received:",
+      "To:",
+      "Error:",
+      "Mime-Version",
+      "XCC:"
+    ],
+    "correct": [0, 1, 3]
+  },
+  {
+    "q": "Quali tra i seguenti file non riguarda la posta elettronica?",
+    "options": [
+      "/etc/mail/access",
+      "/bin/mail",
+      "/etc/sendmail.conf",
+      "/etc/aliases",
+      "/etc/resolv.conf"
+    ],
+    "correct": [1, 2, 3]
+  },
+  {
+    "q": "Quale funzione svolge il Network Information Server (NIS)?",
+    "options": [
+      "Serve per convertire i nomi Internet in indirizzi IP",
+      "Serve per convertire gli indirizzi IP in nomi Internet",
+      "Serve per definire i file system da esportare ad altri host",
+      "Serve per condividere le tabelle di sistema tra host Unix",
+      "Serve per condividere le risorse tra sistemi Windows"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Quale tabella consente di condividere le caratteristiche degli utenti mediante NIS?",
+    "options": [
+      "/etc/networks",
+      "/etc/passwd",
+      "/etc/group",
+      "/etc/services",
+      "/etc/auto.home"
+    ],
+    "correct": [1, 2, 4]
+  },
+  {
+    "q": "Quale delle seguenti affermazioni è corretta?",
+    "options": [
+      "Il comando per conoscere il dominio NIS di un host è ypwhich",
+      "Il comando per conoscere il contenuto di una mappa NIS è ypcat",
+      "Il nome del processo che esegue NIS su un client è ypserv",
+      "Il nome del processo che esegue NIS su un server è ypbind"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Il Multipurpose Internet Mail Extensions (MIME) è:",
+    "options": [
+      "Una codifica che consente di trasportare dati multimediali, se il client riconosce MIME",
+      "Una codifica per rappresentare i dati multimediali",
+      "Una modifica al protocollo Simple Mail Transfer Protocol (SMTP)",
+      "Una modifica del protocollo Post Office Protocol (POP)"
+    ],
+    "correct": [0, 1]
+  },
+  {
+    "q": "Una trap SNMP viene generata da un agent quando:",
+    "options": [
+      "In risposta ad una interrogazione del manager",
+      "Ogni secondo",
+      "Avviene un cambiamento di stato della risorsa monitorata",
+      "L’agent non riceve correttamente una richiesta del manager",
+      "Nessuna delle precedenti"
+    ],
+    "correct": [4]
+  },
+  {
+    "q": "Indicare le definizioni corrette riguardo i campi dell’header di una cella ATM:",
+    "options": [
+      "Payload type indica il tipo di dato trasportato (info di servizio o dati utente)",
+      "Virtual Path Identifier indica l’identificativo del percorso all’interno di un Virtual Channel",
+      "La UNI ha come primo campo, non presente in NNI, il parametro GFC",
+      "UNI o NNI hanno identico formato nell’intestazione",
+      "Il parametro Cell Loss Priority fornisce informazioni sulle celle perse"
+    ],
+    "correct": [0, 2]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera:",
+    "options": [
+      "Il livello presentazione è presente sia nel modello di riferimento ISO/OSI che in quello del TCP/IP",
+      "Un router si comporta come un Intermediate System (IS) del modello di riferimento ISO/OSI",
+      "Il livello trasporto è presente sia nel modello di riferimento ISO/OSI che in quello TCP/IP",
+      "Il livello presentazione usa i servizi del livello trasporto",
+      "Il livello data link si occupa della comunicazione tra due modi della stessa rete"
+    ],
+    "correct": [1, 2]
+  },
+  {
+    "q": "Indicare le affermazioni errate in merito al modello di riferimento ISO/OSI:",
+    "options": [
+      "Livelli adiacenti comunicano attraverso le loro interfacce",
+      "I protocolli del livello superiore offrono i servizi a quelli del livello inferiore",
+      "Ogni livello è costituito da uno o più entità",
+      "Le entità appartenenti allo stesso livello dello stesso host sono definite peer entities",
+      "L’entità di livello N fruisce dei servizi dell’entità N-1 attraverso service access point di livello N-1"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Nell’allocazione automatica del DHCP un indirizzo IP:",
+    "options": [
+      "Viene assegnato ad uno specifico client in maniera permanente",
+      "Viene assegnato ad un client per il solo periodo in cui è connesso",
+      "Viene generato casualmente dal server",
+      "Viene assegnato in base al tipo di sistema operativo dell’host che lo richiede",
+      "Viene assegnato in base alla tipologia di rete utilizzata"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Indicare le affermazioni corrette per la rete ATM:",
+    "options": [
+      "AAL5 è adatto per applicazioni TCP/IP",
+      "AAL1 è adatto per applicazioni voce e video digitali",
+      "AAL2 offre servizi a bit rate costante",
+      "AAL3/4 offre servizi per applicazioni sensibili a cell delay",
+      "AAL3/4 implementa i servizi streaming mode e message mode"
+    ],
+    "correct": [2, 4]
+  },
+  {
+    "q": "Quale tra i seguenti protocolli di routing è un protocollo EGP?",
+    "options": ["IBGP", "IGRP", "FR", "BGP", "X.225"],
+    "correct": [4]
+  },
+  {
+    "q": "Il record PTR consente al DNS di definire:",
+    "options": [
+      "Un alias per il nome di un host",
+      "Il server che gestisce la posta per il dominio",
+      "Il server caching only per il dominio",
+      "Di fornire il nome host associato ad un indirizzo IP",
+      "Nessuna delle precedenti"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Sendmail:",
+    "options": [
+      "È un programma di trasporto di posta elettronica",
+      "Si basa sul protocollo SMTP per il trasferimento delle email",
+      "È un’interfaccia utente per la visualizzazione delle email",
+      "Fornisce alias di posta",
+      "Permette la composizione del testo delle email"
+    ],
+    "correct": [0, 1]
+  },
+  {
+    "q": "Indicare quale affermazione è vera, nel caso della rete ATM:",
+    "options": [
+      "Nel modello di riferimento di ATM, gli AAL servono per adattare user plane e control plane al livello ATM",
+      "Nel modello di riferimento di ATM, servono per adattare user plane e control plane al livello fisico",
+      "Nel modello di riferimento di ATM, AAL è definito nel plane management",
+      "Nel modello di riferimento di ATM, il layer management serve per gestire i flussi informativi di operation e maintenance",
+      "Nel modello di riferimento di ATM, il segmentation and reassembly è definito nel physical layer"
+    ],
+    "correct": [0]
+  },
+  {
+    "q": "Indicare quale tipo di messaggio non è usato da BGP:",
+    "options": [
+      "Open message",
+      "Update message",
+      "Hello message",
+      "Notification message",
+      "Keepalive message"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Cosa stabilisce la seguente regola di filtraggio 'iptables -A INPUT -s 127.0.0.1 -p icmp -j DROP'?",
+    "options": [
+      "Viene aggiunto alla tabella di filter il rifiuto di tutti i pacchetti ICMP provenienti dall’indirizzo 127.0.0.1",
+      "Viene aggiunto alla tabella di filter il rifiuto di tutti i pacchetti, ad eccezione di quelli ICMP, provenienti dall’indirizzo 127.0.0.1",
+      "Viene aggiunto alla tabella di filter l’accettazione di tutti i pacchetti ICMP provenienti dall’indirizzo 127.0.0.1",
+      "Viene cancellato dalla tabella di filter il rifiuto di tutti i pacchetti ICMP provenienti dall’indirizzo 127.0.0.1",
+      "Nessuna delle precedenti"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata a proposito del protocollo Frame Relay:",
+    "options": [
+      "Ha prestazioni superiori a X.25",
+      "È un protocollo a livello 2 del modello di riferimento ISO/OSI",
+      "È disegnato per interconnettere router remoti in modo efficiente",
+      "Il controllo dell’errore è limitato essenzialmente ai nodi periferici della rete",
+      "Il protocollo non supporta applicazioni isocrone nativegp"
+    ],
+    "correct": [4]
+  },
+  {
+    "q": "Indicare le affermazioni corrette riguardo BGP:",
+    "options": [
+      "BGP non può effettuare routing di tipo pass-through",
+      "BGP usa pacchetti keepalive per verificare l’integrità delle sessioni con i peers",
+      "BGP usa la porta 115",
+      "BGP invia pacchetti di tipo notification per informare di problemi o errori i peers",
+      "BGP definisce 4 tipi di messaggio"
+    ],
+    "correct": [1, 3]
+  },
+  {
+    "q": "Quali sono i vantaggi di NFS?",
+    "options": [
+      "Riduzione spazio disco locale",
+      "Manipolazione dei file remoti con comandi UNIX locali",
+      "Ottimo bilanciamento del traffico di rete",
+      "Semplificazione del task di supporto",
+      "Autenticazione singola"
+    ],
+    "correct": [0, 1, 3]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è appropriata per il livello di trasporto:",
+    "options": [
+      "Mette in comunicazione le applicazioni dei due nodi comunicanti",
+      "È il primo livello end-to-end (dal basso verso l’alto della pila ISO/OSI)",
+      "Garantisce il trasferimento affidabile di informazioni",
+      "È responsabile della scelta del cammino da intraprendere per effettuare la comunicazione",
+      "È responsabile della compressione/decompressione dei dati"
+    ],
+    "correct": [1, 2]
+  },
+  {
+    "q": "Indicare le affermazioni corrette in merito al routing:",
+    "options": [
+      "Gli algoritmi di routing usano metriche che dipendono dalla lunghezza e dall’affidabilità del percorso tra due nodi",
+      "Gli algoritmi di routing usano metriche che dipendono dai costi di comunicazione tra due nodi",
+      "Gli algoritmi di routing considerano carico e costi relativi del link",
+      "RIP ottimizza il routing in base al numero di IS presenti"
+    ],
+    "correct": [0, 2]
+  },
+  {
+    "q": "Quali sono le fasi previste in un processo DHCP?",
+    "options": [
+      "Requesting, offering e acknowledgement",
+      "Offering, required e acknowledgement",
+      "Discovery, offering, request e acknowledgement",
+      "Requesting, assignment e acknowledgement",
+      "Offering, query, assignment e acknowledgement"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Nell’ambito della sicurezza di rete, cosa si intende per 'Accountability'?",
+    "options": [
+      "Controllo degli utenti di un sistema informatico",
+      "Grado di utilizzo di una risorsa",
+      "Il livello di sicurezza di un sistema informativo",
+      "Individuazione di chi ha invocato una operazione in un sistema informativo",
+      "Un componente del sistema operativo che verifica i diritti di accesso di un utente"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "In una rete suddivisa in molteplici sottoreti si deve:",
+    "options": [
+      "È sufficiente configurare un solo server DHCP",
+      "Si può configurare un server DHCP per ogni sottorete, ma è poco efficiente",
+      "Occorre configurare per ogni sottorete un DHCP relay agent che monitorizza i broadcast DHCP",
+      "Configurare il protocollo bootstrap in quanto il DHCP non è utilizzabile in questa situazione",
+      "I client devono essere configurati manualmente"
+    ],
+    "correct": [1]
+  },
+  {
+    "q": "Nel sistema ISO/OSI, a che livello si pone il File Transfer Protocol?",
+    "options": [
+      "A livello di sessione",
+      "A livello fisico",
+      "A livello applicativo",
+      "A livello di trasporto",
+      "A livello di presentazione"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Nell’ambito della sicurezza di rete, cosa si intende per 'attacco'?",
+    "options": [
+      "Sequenza di azioni eseguite per ottenere il controllo di un sistema informativo",
+      "Tentativo di lettura di un messaggio di posta elettronica",
+      "Sequenza di azioni eseguite per corrompere un DBMS",
+      "Sequenza di operazioni effettuate per corrompere un router",
+      "Programma software sviluppato al fine di controllare il traffico di rete di un host"
+    ],
+    "correct": [0]
+  },
+  {
+    "q": "Il record NS consente al DNS di definire:",
+    "options": [
+      "Il server che gestisce la posta per un host o un dominio",
+      "È un record inesistente",
+      "Il server autorizzato a rispondere per il dominio",
+      "Il server NIS per il dominio",
+      "Nessuna delle precedenti"
+    ],
+    "correct": [2]
+  },
+  {
+    "q": "Quale mezzo trasmissivo, ove è possibile utilizzarlo, offre il miglior rapporto costo/prestazioni?",
+    "options": [
+      "Cavo coax Thin Ethernet",
+      "Cavo coax Thick Ethernet",
+      "Cavo STP",
+      "Fibra ottica",
+      "Cavo UTP"
+    ],
+    "correct": [3]
+  },
+  {
+    "q": "Nell’ambito della sicurezza di rete, cosa si intende per 'vulnerabilità procedurale'?",
+    "options": [
+      "Difetto della modalità con cui si opera",
+      "Difetto della modalità di aggiornamento del personale",
+      "Difetto nell’implementazione dello sviluppo del sistema informativo",
+      "Difetto nella pianificazione dei rischi di un sistema informativo"
+    ],
+    "correct": [0]
+  }
+];
+
+    const form = document.getElementById("quizForm");
+    let currentQuestion = 0;
+    let score = 0;
+
+    let notAnswered = [];
+    for(let i = 0; i < questions.length; i++) {
+      notAnswered.push(i);
+    }
+
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = `question${i}`;
+
+      const title = document.createElement("p");
+      title.textContent = `${i + 1 + 101}. ${q.q}`;
+      div.appendChild(title);
+
+      const answersDiv = document.createElement("div");
+      answersDiv.className = "answers";
+      q.options.forEach((opt, idx) => {
+        const label = document.createElement("label");
+        label.className = "answer-option";
+
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = `q${i}`;
+        input.value = idx;
+
+        const idxSpan = document.createElement("span");
+        idxSpan.textContent = ` - ${idx}`;
+        idxSpan.style.fontSize = "0.8rem";
+        idxSpan.style.color = "#888";
+
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(opt));
+        label.appendChild(idxSpan); // Append the smaller idx text
+        answersDiv.appendChild(label);
+      });
+      div.appendChild(answersDiv);
+      shuffleQuestions(answersDiv);
+
+      const feedback = document.createElement("div");
+      feedback.id = `feedback${i}`;
+      feedback.className = "feedback";
+      div.appendChild(feedback);
+
+      form.appendChild(div);
+    });
+
+
+    function shuffleQuestions(questionToShuffle) {
+      const questionDivs = Array.from(questionToShuffle.children); // Get all question divs as an array
+
+      // Shuffle the array using Fisher-Yates algorithm
+      for (let i = questionDivs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questionDivs[i], questionDivs[j]] = [questionDivs[j], questionDivs[i]];
+      }
+
+      // Append the shuffled divs back to the form
+      questionDivs.forEach(div => questionToShuffle.appendChild(div));
+    }
+
+    function showQuestion(index) {
+      document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+      const qDiv = document.getElementById(`question${index}`);
+      document.getElementById("progress").textContent = `progresso: ${questions.length - notAnswered.length} / ${questions.length}`;
+      if (notAnswered.length == 0) {
+        showResult();
+      } else {
+        qDiv.style.display = 'block';
+      }
+      console.log("Current question: " + currentQuestion);
+      notAnswered.splice(notAnswered.indexOf(currentQuestion), 1);
+
+    }
+
+    function confirmAnswer(event) {
+      event.preventDefault();
+      const selected = document.querySelectorAll(`input[name=q${currentQuestion}]:checked`);
+      if (selected.length === 0) {
+        alert("Seleziona almeno una risposta per confermare.");
+        return;
+      }
+
+      const selectedValues = Array.from(selected).map(el => parseInt(el.value));
+      const correctAnswers = questions[currentQuestion].correct;
+      const feedbackDiv = document.getElementById(`feedback${currentQuestion}`);
+      const nextBtn = document.querySelector('.next-btn');
+
+      const isCorrect =
+        selectedValues.length === correctAnswers.length &&
+        selectedValues.every(val => correctAnswers.includes(val)) &&
+        correctAnswers.every(val => selectedValues.includes(val));
+
+      if (isCorrect) {
+        feedbackDiv.textContent = "Risposta corretta!";
+        feedbackDiv.className = "feedback correct";
+        score++;
+      } else {
+        feedbackDiv.innerHTML = `Risposta sbagliata. Le risposte corrette sono: <strong>${correctAnswers}</strong>`;
+        feedbackDiv.className = "feedback wrong";
+      }
+
+      nextBtn.style.display = 'inline-block';
+      document.querySelector('.confirm-btn').disabled = true;
+    }
+
+    function nextQuestion(event) {
+      event.preventDefault();
+      currentQuestion = notAnswered[Math.floor(Math.random() * notAnswered.length)];
+
+      document.querySelector('.confirm-btn').disabled = false;
+      document.querySelector('.next-btn').style.display = 'none';
+      showQuestion(currentQuestion);
+    }
+
+    function showResult() {
+      document.querySelector('.confirm-btn').style.display = 'none';
+      document.querySelector('.next-btn').style.display = 'none';
+      document.getElementById("result").textContent = `Hai totalizzato ${score} su ${questions.length} risposte corrette.`;
+    }
+
+    // Start the quiz
+    showQuestion(currentQuestion);
+  </script>
+</body>
+</html>
