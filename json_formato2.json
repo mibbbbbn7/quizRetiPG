@@ -1,0 +1,1257 @@
+[
+  {
+    "q": "Quale dei seguenti elementi non è una topologia di rete?",
+    "correct": ["Local bus"],
+    "wrong": ["Stella", "Bus", "Albero", "Anello"]
+  },
+  {
+    "q": "Indicare quale tra le seguenti proprietà è caratterizzante nella distinzione reti connectionless e connection oriented",
+    "correct": ["Presenza di pacchetti relativi all’attivazione di una connessione"],
+    "wrong": [
+      "Presenza di fili",
+      "Presenza di traffico di dati",
+      "Presenza di pacchetti di dati",
+      "Presenza di corrente elettrica"
+    ]
+  },
+  {
+    "q": "Indicare quale metodo di accesso caratterizza una rete Ethernet",
+    "correct": ["CSMA/CD"],
+    "wrong": ["Collision Sense Multiple Access", "Token", "Bus logico", "Bus"]
+  },
+  {
+    "q": "Quali delle seguenti proprietà sono riconducibili ad una rete Ethernet?",
+    "correct": [
+      "Topologia fisica a bus",
+      "Topologia fisica a stella,topologia logica a bus",
+      "Topologia fisica a stella"
+    ],
+    "wrong": ["Topologia ad anello", "Topologia fisica a bus,topologia logica a stella"]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI descrive la funzione di suddividere in pacchetti il flusso dei dati prodotti da una applicazione?",
+    "correct": ["Trasporto"],
+    "wrong": ["Applicazione", "Data Link", "Rete", "Sessione"]
+  },
+  {
+    "q": "Quale è la principale differenza tra i protocolli TCP ed UDP?",
+    "correct": ["UDP è meno affidabile di TCP"],
+    "wrong": [
+      "Sono riconducibili a diversi livelli nel modello di riferimento ISO/OSI",
+      "UDP è un protocollo più lento di TCP",
+      "UDP è più usato di TCP",
+      "UDP è più affidabile di TCP"
+    ]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI descrive la funzione di scegliere il percorso migliore nella rete per raggiungere il nodo di destinazione?",
+    "correct": ["Rete"],
+    "wrong": ["Applicazione", "Fisico", "Trasporto", "Data Link"]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni sono applicabili ai protocolli TCP e IP",
+    "correct": ["Appartengono a due diversi livelli del modello di riferimento ISO/OSI", "TCP usa i servizi IP"],
+    "wrong": [
+      "TCP è più affidabile di IP",
+      "IP è più affidabile di TCP",
+      "Appartengono allo stesso livello del modello di riferimento"
+    ]
+  },
+  {
+    "q": "Quale protocollo è relativo all'applicazione Posta Elettronica?",
+    "correct": ["SMTP"],
+    "wrong": ["SMDS", "TCP", "SNA", "SNMP"]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI si fa carico della ritrasmissione di pacchetti Ethernet nel caso vengano riscontrati errori? (non si capisce bene)",
+    "correct": ["Data link", "Trasporto"],
+    "wrong": ["Fisico", "Rete", "Applicazione"]
+  },
+  {
+    "q": "In una rete Ethernet, quale sottolivello ristrasmette pacchetti Ethernet nel caso si verifichino errori?",
+    "correct": ["LLC"],
+    "wrong": ["MAC", "SMS", "SMDS", "SNMP"]
+  },
+  {
+    "q": "Quale livello del modello di riferimento ISO/OSI si fa carico della ritrasmissione di datagram IP in caso di errori trasmissivi del datagram?",
+    "correct": ["Rete"],
+    "wrong": ["Presentation", "LLC", "MAC", "Data link"]
+  },
+  {
+    "q": "Indicare quali delle seguenti interfacce non appartengono al livello fisico",
+    "correct": ["X.25"],
+    "wrong": ["100baseT", "10baseFL", "V.35", "X.21 bis"]
+  },
+  {
+    "q": "Indicare quali dei seguenti protocolli non appartengono al livello Network.",
+    "correct": ["TCP", "SMTP"],
+    "wrong": ["IP", "X.25", "OSPF"]
+  },
+  {
+    "q": "Indicare quali dei seguenti protocolli non appartengono al livello Network.",
+    "correct": ["NFS", "SNMP"],
+    "wrong": ["RIP", "IP", "X.25"]
+  },
+  {
+    "q": "Cosa vuol dire effettuare subnet di un indirizzo di rete IP?",
+    "correct": [
+      "Suddividere un indirizzo di rete in più sottoindirizzi",
+      "Aumentare i bit della parte rete dell’indirizzo",
+      "Diminuire i bit della parte host dell’indirizzo"
+    ],
+    "wrong": [
+      "Accorpare insieme più indirizzi IP",
+      "Diminuire i bit della parte rete dell’indirizzo"
+    ]
+  },
+  {
+    "q": "Cosa vuol dire effettuare supernet di indirizzi IP?",
+    "correct": [
+      "Diminuire i bit della parte rete dell’indirizzo",
+      "Raggruppare più indirizzi IP in un unico indirizzo",
+      "Aumentare i bit della parte host dell’indirizzo"
+    ],
+    "wrong": [
+      "Aumentare i bit della parte rete dell’indirizzo",
+      "Diminuire i bit della parte host dell’indirizzo"
+    ]
+  },
+  {
+    "q": "Indicare quale relazione è esatta",
+    "correct": [
+      "Gli indirizzi host della rete 194.143.128.0/30 sono 194.143.128.1 – 194.143.128.2",
+      "Gli indirizzi host della rete 194.143.128.0/28 sono 194.143.128.1 – 194.143.128.14",
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.254"
+    ],
+    "wrong": [
+      "Gli indirizzi host della rete 194.143.128.0/30 sono 194.143.128.1 – 194.143.128.30",
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.24"
+    ]
+  },
+  {
+    "q": "Indicare quale relazione è errata.",
+    "correct": [
+      "Gli indirizzi host della rete 194.143.128.0/27 sono 194.143.128.1 – 194.143.128.7",
+      "Gli indirizzi host della rete 194.143.128.0/27 sono 194.143.128.1 – 194.143.128.27",
+      "Gli indirizzi host della rete 194.143.128.0/64 sono 194.143.128.1 – 194.143.128.64"
+    ],
+    "wrong": [
+      "Gli indirizzi host della rete 194.143.128.0/25 sono 194.143.128.1 – 194.143.128.126",
+      "Gli indirizzi host della rete 194.143.128.0/30 sono 194.143.128.1 – 194.143.128.2"
+    ]
+  },
+  {
+    "q": "Indicare quale relazione è errata.",
+    "correct": [
+      "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.255",
+      "Gli indirizzi host della rete 194.143.128.0/274 sono 194.143.128.0 – 194.143.128.254"
+    ],
+    "wrong": [
+        "Gli indirizzi host della rete 194.143.128.0/26 sono 194.143.128.1 – 194.143.128.62",
+        "Gli indirizzi host della rete 194.143.128.0/24 sono 194.143.128.1 – 194.143.128.254",
+      "La rete 194.143.128.0/22 comprende tutti gli indirizzi che vanno da 194.143.128.0 a 194.143.131.255"
+    ]
+  },
+  {
+    "q": "Qual è l'indirizzo di broadcast della rete 141.250.1.0/26?",
+    "correct": ["141.250.1.63"],
+    "wrong": [
+      "141.250.1.0",
+      "141.250.1.1",
+      "141.250.1.127",
+      "141.250.1.255"
+    ]
+  },
+  {
+    "q": "Qual è l’indirizzo di rete della rete 141.250.1.0/26?",
+    "correct": ["141.250.1.0"],
+    "wrong": [
+      "141.250.1.32",
+      "141.250.1.64",
+      "141.250.1.128",
+      "141.250.1.256"
+    ]
+  },
+  {
+    "q": "Quali delle seguenti applicazioni può compromettere la sicurezza delle transazioni Web, in quanto può alterare l'integrità del Server o quella del Client?",
+    "correct": [
+      "L’uso di ActiveX",
+      "L’uso di JavaScript",
+      "La connessione a database via CGI"
+    ],
+    "wrong": [
+      "L’uso di codice HTML",
+      "L’uso del protocollo HTTPS"
+    ]
+  },
+  {
+    "q": "Quale dei seguenti fenomeni è potenzialmente più pericoloso per l'affidabilità di un servizio Internet?",
+    "correct": ["Denial of service"],
+    "wrong": [
+      "IP spoofing",
+      "ICMP",
+      "Elevato traffico",
+      "Presenza di collisioni"
+    ]
+  },
+  {
+    "q": "Quale dei seguenti fenomeni può potenzialmente compromettere l'affidabilità di un SERVER WWW?",
+    "correct": ["Estensibilità del SERVER"],
+    "wrong": [
+      "Estensibilità del CLIENT",
+      "Elevato traffico",
+      "Commercio elettronico",
+      "Elevate collisioni"
+    ]
+  },
+  {
+    "q": "Quale dei seguenti fenomeni è potenzialmente più pericoloso per la sicurezza dei servizi Internet presenti in una LAN aziendale?",
+    "correct": ["Un Trojan Horse presente su un host della rete"],
+    "wrong": [
+      "Elevato numero di pacchetti broadcast rilevati",
+      "Elevate collisioni",
+      "Elevato traffico",
+      "Interfaccia del router difettosa"
+    ]
+  },
+  {
+    "q": "Che cosa è più opportuno fare in caso di degradate prestazioni di una rete Ethernet 10baseT?",
+    "correct": ["Introdurre uno switch a livello 2 OSI"],
+    "wrong": [
+      "Dividere la rete a livello 3 OSI,mediante uso di subnet",
+      "Cambiare l’apparato fisico dell’HUB",
+      "Suddividere la connessioni in più HUB",
+      "Cambiare modello di HUB"
+    ]
+  },
+  {
+    "q": "Cosa è più corretto fare in caso di prestazioni degradate di una LAN Ethernet?",
+    "correct": ["Controllare lo stato dell’HUB"],
+    "wrong": [
+      "Controllare l’impianto elettrico",
+      "Controllare l’impianto di condizionamento",
+      "Controllare l’impianto idraulico",
+      "Controllare la versione software del PC"
+    ]
+  },
+  {
+    "q": "Se un utente ha ogni tanto problemi di connessione via modem, a quale verifica daresti la priorità?",
+    "correct": ["Numero di linee in ricezione dell’Internet Service Provider"],
+    "wrong": [
+      "Prestazioni della linea telefonica",
+      "Versione del software di rete del PC",
+      "Versione del sistema operativo del PC",
+      "Tipo di applicazioni usate dall’utente"
+    ]
+  },
+  {
+    "q": "Quale delle seguenti situazioni secondo te genera più probabilmente problemi nella connessione alla rete Internet via modem?",
+    "correct": [
+      "Infrastruttura dell’ISP tarata su 1 linea in ricezione ogni 200 utenti definiti"
+    ],
+    "wrong": [
+      "Modem di basso costo",
+      "Uso di IRC",
+      "PC di basso costo",
+      "Infrastruttura dell’ISP tarata su 1 linea in ricezione ogni 10 utenti definiti"
+    ]
+  },
+  {
+    "q": "Quale dei servizi Internet seguenti potenzialmente può pesare di più sul consumo della banda di connessione all'ISP?",
+    "correct": ["FTP"],
+    "wrong": ["ICMP", "DNS", "Telnet", "SNMP"]
+  },
+  {
+    "q": "Quale dei seguenti servizi Internet richiede costante controllo da parte dell'Amministratore, considerato il suo ruolo strategico?",
+    "correct": ["SMTP"],
+    "wrong": ["Telnet", "FTP", "NTP", "SSH"]
+  },
+  {
+    "q": "Quale dei seguenti servizi Internet richiede maggiore supervisione ed attenzione da parte dell'Amministratore?",
+    "correct": ["NIS"],
+    "wrong": ["Telnet", "FTP", "SNMP"]
+  },
+  {
+    "q": "Quale dei seguenti file deve essere monitorato continuamente dall'Amministratore?",
+    "correct": ["/var/log/daemon.log"],
+    "wrong": [
+      "/etc/services",
+      "/etc/named.conf",
+      "/bin/ping",
+      "/bin/traceroute"
+    ]
+  },
+  {
+    "q": "Quale dei seguenti comandi è più efficace per effettuare la diagnosi veloce di problemi di connessione?",
+    "correct": ["Traceroute"],
+    "wrong": ["Pine", "Elm", "Cat"]
+  },
+  {
+    "q": "Quale delle seguenti operazioni è più adeguata per effettuare la diagnosi nel caso di un PC appena configurato che non si collega?",
+    "correct": [
+      "Configurazione indirizzo IP",
+      "Configurazione subnet mask",
+      "Stato della connessione del cavo"
+    ],
+    "wrong": ["Memoria RAM libera", "Spazio disco libero"]
+  },
+  {
+    "q": "Quale dei seguenti files non ha nulla a che fare con il servizio DNS?",
+    "correct": ["/etc/group", "/etc/passwd"],
+    "wrong": [
+      "/usr/sbin/named",
+      "/etc/named.conf",
+      "/etc/resolv.conf"
+    ]
+  },
+  {
+    "q": "Quali delle seguenti azioni sono effettuate da un Firewall?",
+    "correct": ["Anonimizzazione", "Controllo di accesso in base al Socket"],
+    "wrong": [
+      "IP spoofing",
+      "Privacy",
+      "Denial of service"
+    ]
+  },
+  {
+    "q": "Indicare il tipo di tecnologia di crittografia usata da DES",
+    "correct": ["Una sola chiave comune"],
+    "wrong": [
+      "Chiave pubblica",
+      "Doppia chiave: chiave pubblica e chiave privata",
+      "A doppia coppia di chiavi pubblica e privata",
+      "Due chiavi private distinte"
+    ]
+  },
+  {
+    "q": "Indicare lo schema di crittografia usato nell'algoritmo RSA",
+    "correct": ["Ogni utente o applicazione ha una doppia chiave (pubblica e privata)"],
+    "wrong": [
+      "Ogni utente o applicazione ha una chiave privata",
+      "Unica chiave",
+      "Unica chiave generata dinamicamente",
+      "Doppia chiave"
+    ]
+  },
+  {
+    "q": "Indicare quale tra i seguenti è un metodo di accesso deterministico",
+    "correct": ["Token ring"],
+    "wrong": ["Doppia chiave", "CSMA", "CSMA/CD", "DDA", "HSA"]
+  },
+  {
+    "q": "Indicare quale tra i seguenti non è un metodo di accesso deterministico",
+    "correct": ["CSMA/CD", "CSMA"],
+    "wrong": ["Token bus", "Token ring"]
+  },
+  {
+    "q": "Indicare quale tra le seguenti è un'interfaccia fisica che usa un mezzo trasmissivo con proprietà fisiche spiccatamente diverse dalle altre interfaccie elencate",
+    "correct": ["100baseFL"],
+    "wrong": ["10baseT", "10base2", "10base5", "100baseT"]
+  },
+  {
+    "q": "Indicare quale tra i seguenti livelli del modello di riferimento ISO/OSI non è presente nel modello del TCP/IP",
+    "correct": ["Sessione"],
+    "wrong": ["Fisico", "Data link", "Rete", "Applicazione"]
+  },
+  {
+    "q": "Indicare quale tra i seguenti livelli del modello di riferimento ISO/OSI non è riscontrabile nel modello del TCP/IP",
+    "correct": ["Presentation"],
+    "wrong": ["Applicazione", "Fisico", "Data link", "Rete"]
+  },
+  {
+    "q": "Quali tra i seguenti protocolli di rete non ha componenti al livello RETE del modello di riferimento ISO/OSI",
+    "correct": ["Frame relay"],
+    "wrong": ["ATM", "X.25"]
+  },
+  {
+    "q": "Quale tra le seguenti applicazioni induce un maggior consumo di banda, in reti con elevato numero di utenti?",
+    "correct": ["FTP"],
+    "wrong": ["RIP", "OSPF", "Telnet", "DNS"]
+  },
+  {
+    "q": "Potendo gestire la priorità dei seguenti protocolli, a quali assegnereste alte priorità?",
+    "correct": ["Telnet", "DNS", "SSH"],
+    "wrong": ["FTP", "NNTP"]
+  },
+  {
+    "q": "Potendo gestire la priorità dei seguenti protocolli, a quali assegnereste basse priorità?",
+    "correct": ["FTP", "NNTP"],
+    "wrong": ["Telnet", "DNS", "HTTP"]
+  },
+  {
+    "q": "In che anno può essere fissata secondo te la nascita dei concetti legati alla rete Internet?",
+    "correct": ["1962"],
+    "wrong": ["1948", "1953", "1970", "1982"]
+  },
+  {
+    "q": "In che anno può essere collocato l'inizio del progetto DARPA?",
+    "correct": ["1962"],
+    "wrong": ["1952", "1972", "1982"]
+  },
+  {
+    "q": "In che anno è apparso il primo articolo sul Packet Switching?",
+    "correct": ["1961"],
+    "wrong": ["1971", "1951", "1941", "1981"]
+  },
+  {
+    "q": "Quando sono stati messi in rete i primi due computer?",
+    "correct": ["1965"],
+    "wrong": ["1970", "1963", "1968"]
+  },
+  {
+    "q": "Quando è stata completata la specifica della rete ARPANET?",
+    "correct": ["1968"],
+    "wrong": ["1958", "1963", "1978"]
+  },
+  {
+    "q": "In quale anno viene inventata la posta elettronica?",
+    "correct": ["1973"],
+    "wrong": ["1969", "1975", "1977", "1971"]
+  },
+  {
+    "q": "Quale è stato il primo nodo della rete ARPANET?",
+    "correct": ["UCLA Measurament Center"],
+    "wrong": [
+      "AT&T Laboratories",
+      "SRI",
+      "MIT",
+      "Stanford University"
+    ]
+  },
+  {
+    "q": "Chi è ritenuto essere l'inventore della posta elettronica?",
+    "correct": ["Vint Cerf e Bob Kahn"],
+    "wrong": [
+      "Dennis Jennings",
+      "G. Freeman e Ira Fuchs",
+      "Paul Mockapetris",
+      "Bob Metcalfe"
+    ]
+  },
+  {
+    "q": "Chi è il creatore della rete NSFNET?",
+    "correct": ["Dennis Jennings"],
+    "wrong": [
+      "Ira Fuchs",
+      "Paul Mockapetris",
+      "Vint Cerf"
+    ]
+  },
+  {
+    "q": "In quali anni è stata amministrata da enti pubblici l'infrastruttura di NSFNET?",
+    "correct": ["1985-1995"],
+    "wrong": [
+      "1970-1990",
+      "1980-1990",
+      "1980-1995"
+    ]
+  },
+  {
+    "q": "Chi ha creato il Domain Name System?",
+    "correct": ["Paul Mockapetris"],
+    "wrong": [
+      "Vint Cerf",
+      "Bob Kahn",
+      "Dennis Jennings",
+      "Jonathan B. Postel"
+    ]
+  },
+  {
+    "q": "In che anno Network Solutions ha registrato il milionesimo dominio internet (bonnyview.com)?",
+    "correct": ["1997"],
+    "wrong": ["1982", "1987", "1992", "1999"]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera",
+    "correct": [
+      "Il protocollo SMTP è definito principalmente nell’RFC 822",
+      "Il protocollo SNMP consente di gestire risorse di rete"
+    ],
+    "wrong": [
+      "Il protocollo NFS serve a condividere tabelle di sistema",
+      "La libreria MIB è usata da NFS",
+      "Il protocollo NIS serve per condividere filesystem remoti"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera",
+    "correct": [
+      "SNMP usa la libreria MIB",
+      "NFS serve per condividere filesystem remoti",
+      "NIS serve per condividere tabelle di sistema nel sistema operativo UNIX"
+    ],
+    "wrong": [
+      "In SNMP versione 2 la sicurezza è ben curata",
+      "SNMP non è basato su un’architettura client-server"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera",
+    "correct": [
+      "Ethernet è uno standard de-facto",
+      "Token Ring è uno standard de-facto",
+      "IEEE 802.6 è lo standard de-jure corrispondente alla definizione dei protocolli per le MAN"
+    ],
+    "wrong": [
+      "IEEE 802.4 è lo standard de-jure corrispondente allo standard de-facto Ethernet",
+      "Token Ring è uno standard de-jure emanato da ITU"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è falsa",
+    "correct": [
+      "Il livello Presentazione è presente sia nel modello di riferimento ISO/OSI che in quello del TCP/IP",
+      "Il livello Presentazione usa i servizi del livello Trasporto"
+    ],
+    "wrong": [
+      "Un router si comporta come un Intermediate System (IS) del modello di riferimento ISO/OSI",
+      "Il livello Trasporto è presente sia nel modello di riferimento ISO/OSI che in quello TCP/IP",
+      "Il livello Data Link si occupa della comunicazione tra due nodi adiacenti della rete"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti sigle non indica una interfaccia definita a livello fisico",
+    "correct": ["X.25", "X.28"],
+    "wrong": ["V.35", "RS232", "SONET/SDH"]
+  },
+  {
+    "q": "Indicare quale delle seguenti sigle non indica un protocollo definito a livello Data Link",
+    "correct": ["X.25", "X.75"],
+    "wrong": ["DLCP", "BSC", "HDLC"]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni non è appropriata per il livello Trasporto",
+    "correct": [
+      "È responsabile della scelta del cammino da intraprendere per effettuare la comunicazione",
+      "È responsabile della compressione/decompressione dei dati"
+    ],
+    "wrong": [
+      "Verifica la comunicazione tra i due nodi che l’applicazione fa dialogare",
+      "È il primo livello end-to-end (dal basso verso l’alto della pila ISO/OSI)",
+      "È responsabile per la garanzia che il trasferimento di informazioni avvenga correttamente"
+    ]
+  },
+  {
+    "q": "Quale dei seguenti mezzi trasmissivi è migliore considerando le diverse proprietà, compresa l'economicità?",
+    "correct": ["Cavo UTP"],
+    "wrong": [
+      "Cavo coassiale del tipo Thin Ethernet",
+      "Cavo coassiale del tipo Thick Ethernet",
+      "Cavo STP",
+      "Doppino in rame"
+    ]
+  },
+  {
+    "q": "Quale mezzo trasmissivo fornisce le migliori prestazioni e consente di raggiungere le maggiori distanze?",
+    "correct": ["Fibra ottica"],
+    "wrong": [
+      "Cavo coax Thin Ethernet",
+      "Cavo coax Thick Ethernet",
+      "Cavo STP",
+      "Cavo UTP"
+    ]
+  },
+  {
+    "q": "Quale delle seguenti definizioni non sono appropriate per la fibra ottica?",
+    "correct": [
+      "La distanza massima che si può raggiungere senza mettere ripetitori di segnale è di 500m",
+      "L’angolo di riflessione nella fibra è maggiore dell’angolo di incidenza"
+    ],
+    "wrong": [
+      "Un tipo è chiamata fibra Multimodale Stepped Index",
+      "Un tipo è chiamata fibra Multimodale Graded Index",
+      "Un tipo è chiamata Monomodale"
+    ]
+  },
+  {
+    "q": "Indicare quale affermazione è propria della rete Ethernet",
+    "correct": [
+      "È un metodo di accesso non deterministico",
+      "È uno standard de-facto"
+    ],
+    "wrong": [
+      "È un metodo di accesso deterministico",
+      "È uno standard de-jure",
+      "La trasmissione avviene in banda larga"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti proprietà è propria della rete Ethernet",
+    "correct": [
+      "Usa una codifica del segnale di tipo Manchester",
+      "Il formato dei pacchetti Ethernet e IEEE 802.3 è simile: differisce solo per un campo nell’intestazione ed uno nella coda del messaggio"
+    ],
+    "wrong": [
+      "Ha una topologia ad anello",
+      "Usa il metodo di accesso CSMA",
+      "Gli HUB implementano una topologia logica a anello"
+    ]
+  },
+  {
+    "q": "Quale delle seguenti applicazioni ha bisogno dell'implementazione del QoS (Quality of Service)?",
+    "correct": ["Teleconferenza"],
+    "wrong": ["E-mail", "FTP", "NIS", "HTTP"]
+  },
+  {
+    "q": "Quali tra le seguenti applicazioni ha caratteristiche isocrone?",
+    "correct": ["Videoconferenza"],
+    "wrong": ["FTP", "SMTP", "SNMP", "NFS"]
+  },
+  {
+    "q": "Quali tra i seguenti protocolli non appartiene alla definizione di X.25?",
+    "correct": ["X.400"],
+    "wrong": ["X.75", "X.28", "X.29", "X.3"]
+  },
+  {
+    "q": "Indicare quale dispositivo è estraneo al protocollo Frame Relay",
+    "correct": ["HUB"],
+    "wrong": ["FRAD", "Endpoint", "T1/E1 multiplexer", "Switch"]
+  },
+  {
+    "q": "Indicare quale delle proprietà o caratteristiche seguenti non è riconducibile al protocollo Frame Relay",
+    "correct": ["Consente velocità maggiori rispetto ai CDN"],
+    "wrong": [
+      "Consente di risparmiare sugli apparati utente",
+      "Ha costi ridotti rispetto ai CDN",
+      "Consente una stabilità maggiore delle connessioni",
+      "Consente a bassissimo costo di personalizzare il servizio in base alle esigenze dell’utente"
+    ]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata a proposito del protocollo Frame Relay",
+    "correct": [
+      "In reti complesse ha tempi di risposta peggiori rispetto ai CDN"
+    ],
+    "wrong": [
+      "Offre una maggior resistenza ai guasti rispetto ai CDN",
+      "Consente il trasporto integrato di dati multimediali",
+      "Consente il trasporto di diversi protocolli applicativi",
+      "Offre una maggior qualità del servizio rispetto ai CDN"
+    ]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata a proposito del protocollo Frame Relay",
+    "correct": ["È un protocollo a livello 3 del modello di riferimento ISO/OSI"],
+    "wrong": [
+      "Ha prestazioni superiori a X.25",
+      "È disegnato per interconnettere router remoti in modo efficiente",
+      "Il controllo dell’errore è limitato essenzialmente ai nodi periferici (edge) della rete",
+      "È stato sviluppato presso i Bell Labs, come parte della specifica ISDN"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni non è appropriata a proposito del protocollo Frame Relay",
+    "correct": ["È un protocollo connectionless"],
+    "wrong": [
+      "Presenta la caratteristica di una forte scalabilità",
+      "Due stazioni FR possono attivare sia connessioni permanenti che temporanee",
+      "Supporta velocità dai 64Kbps ai 2Mbps",
+      "La correzione dell’errore ha un costo molto basso ed è molto limitata"
+    ]
+  },
+  {
+    "q": "Quali delle seguenti proprietà determina le prestazioni della rete Frame Relay?",
+    "correct": ["CIR"],
+    "wrong": ["CIDR", "RER", "EIR", "DLCI"]
+  },
+  {
+    "q": "Quale dei seguenti campi dell'header di una frame ne determina la possibilità di essere scartata dagli switch di una rete Frame Relay, se attivo?",
+    "correct": ["DE"],
+    "wrong": ["FCS", "DLCI", "BECN", "FECN"]
+  },
+  {
+    "q": "Quale tra i seguenti può essere utilizzato per realizzare sia LAN che MAN e WAN?",
+    "correct": ["ATM"],
+    "wrong": ["X.25", "SNA", "HDLC"]
+  },
+  {
+    "q": "Qual è il range di velocità supportato da ATM (in bps)?",
+    "correct": ["25M-2.5G"],
+    "wrong": ["64K-2M", "2M-622M", "2M-25M", "64K-25M"]
+  },
+  {
+    "q": "Indicare l'affermazione non appropriata nel caso del protocollo ATM",
+    "correct": ["Le prestazioni aggregate della rete non dipendono dal numero di nodi connessi che comunicano"],
+    "wrong": [
+      "È un protocollo connection oriented",
+      "Ogni stazione ha un proprio indirizzo ATM",
+      "La comunicazione tra nodi non attraversa Intermediate System",
+      "Due nodi della rete, a qualsiasi distanza siano, comunicano direttamente"
+    ]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata nel caso del protocollo ATM",
+    "correct": ["Le prestazioni della rete non dipendono dall’aumentare dei nodi che comunicano"],
+    "wrong": [
+      "Una LAN ATM presenta delle possibilità di crescita illimitate",
+      "La tecnologia ATM prescinde dalla modalità trasmissiva",
+      "ATM presenta una latenza della rete ridotta rispetto alle altre tecnologie",
+      "Il protocollo ATM massimizza il throughput della rete"
+    ]
+  },
+  {
+    "q": "Indicare quale dei seguenti concetti è estraneo al protocollo ATM",
+    "correct": ["CIR"],
+    "wrong": ["AAL", "UNI", "NNI", "QoS"]
+  },
+  {
+    "q": "A proposito di ATM, quale delle seguenti affermazioni è errata?",
+    "correct": [
+      "Il servizio CBR è adatto alla trasmissione dei dati",
+      "AAL5 non è adatto ad applicazioni TCP/IP"
+    ],
+    "wrong": [
+      "Il servizio UBR è adatto alla trasmissione dei dati",
+      "Il servizio VBR è adatto alla trasmissione dei dati",
+      "Applicazioni di telefonia numerica necessitano del servizio CBR"
+    ]
+  },
+  {
+    "q": "Quale protocollo Internet è collocabile al livello 3 del modello di riferimento ISO/OSI?",
+    "correct": ["IP"],
+    "wrong": ["TCP", "ARP", "UDP", "SMTP"]
+  },
+  {
+    "q": "Indicare quale affermazione è corretta, a proposito degli indirizzi IP seguenti",
+    "correct": [
+      "Gli indirizzi IP di classe C hanno come subnet mask associata il valore 255.255.255.0",
+      "Gli indirizzi IP di classe B hanno il primo byte compreso o uguale tra i valori 128 e 191",
+      "Il numero di bit della parte host di un indirizzo di classe A è 24"
+    ],
+    "wrong": [
+      "Gli indirizzi IP di classe A sono quelli che hanno come primo byte un numero minore di 127",
+      "Gli indirizzi di classe C hanno il primo byte inferiore o uguale a 223"
+    ]
+  },
+  {
+    "q": "Quale delle seguenti affermazioni è esatta?",
+    "correct": [
+      "L’indirizzo IP identifica la connessione dell’host alla rete",
+      "L’indirizzo Ethernet di un host del quale è noto l’indirizzo IP è fornito dinamicamente dal protocollo ARP",
+      "La richiesta ARP avviene con un pacchetto di tipo broadcast"
+    ],
+    "wrong": [
+      "L’indirizzo IP identifica l’host",
+      "L’indirizzo Ethernet di un host del quale è noto l’indirizzo IP è fornito dinamicamente dal protocollo RARP"
+    ]
+  },
+  {
+    "q": "A proposito del protocollo ICMP, quali delle seguenti affermazioni è errata?",
+    "correct": [
+      "Il codice 0 è associato al campo echo reply",
+      "Il codice 8 è associato al campo echo request",
+      "Un pacchetto ICMP può essere usato per verificare la raggiungibilità di un nodo"
+    ],
+    "wrong": [
+        "Un pacchetto ICMP non può riportare anomalie nel traffico IP",
+      "Un pacchetto ICMP non può essere usato per conoscere la subnet mask che un nodo usa"
+    ]
+  },
+  {
+    "q": "Quale affermazione è corretta?",
+    "correct": [
+      "Il protocollo RIP basa il calcolo del miglior percorso in base alla distanza in termini di nodi intermedi",
+      "Un host pone come indirizzo fisico del destinatario quello dell’host nel caso in cui appartenga alla stessa rete IP",
+      "Un router IP si comporta come un Intermediate System del modello di riferimento ISO/OSI"
+    ],
+    "wrong": [
+      "Il protocollo RIP basa il calcolo del miglior percorso in base alla velocità dei collegamenti",
+      "Il protocollo OSPF basa il calcolo del miglior percorso in base alla distanza in termini di nodi intermedi"
+    ]
+  },
+  {
+    "q": "Quale caratteristica è estranea alle proprietà di un algoritmo di routing?",
+    "correct": ["Statico"],
+    "wrong": [
+      "Semplice e con basso overhead",
+      "Ottimale",
+      "Robusto e stabile",
+      "Flessibile"
+    ]
+  },
+  {
+    "q": "Quale tra i seguenti protocolli non è un protocollo di routing Interno ad Autonomous System?",
+    "correct": ["BGP"],
+    "wrong": ["RIP", "OSPF", "IGRP", "ISIS"]
+  },
+  {
+    "q": "Quale caratteristica non è appropriata al protocollo di routing OSPF?",
+    "correct": [
+      "Ha circa lo stesso carico computazionale del protocollo RIP",
+      "È un protocollo EGP",
+      "Usa un algoritmo Vettore – Distanza"
+    ],
+    "wrong": [
+      "Bilancia il carico su diversi link",
+      "È gerarchico"
+    ]
+  },
+  {
+    "q": "Quale affermazione è corretta?",
+    "correct": [
+      "Gli Switch sono classificati al livello 2 del modello di riferimento ISO/OSI",
+      "Gli Switch che eseguono protocolli di routing dinamici sono classificati al livello 3 del modello di ISO/OSI",
+      "Gli HUB sono classificati al livello 2 del modello di riferimento ISO/OSI"
+    ],
+    "wrong": [
+        "Gli HUB sono classificati al livello 1 del modello di riferimento ISO/OSI",
+      "Gli Switch sono classificati al livello 1 del modello di riferimento ISO/OSI"
+    ]
+  },
+  {
+    "q": "Su quali criteri un router instrada i pacchetti?",
+    "correct": ["Indirizzo IP della rete di destinazione"],
+    "wrong": [
+      "Indirizzo IP dell’host di destinazione",
+      "Indirizzo IP della rete mittente",
+      "Indirizzo IP dell’host mittente"
+    ]
+  },
+  {
+    "q": "Quale indirizzo di destinazione si usa da parte di un host mittente?",
+    "correct": [
+      "L’indirizzo dell’host di destinazione se appartenente alla stessa rete",
+      "L’indirizzo dell’Intermediate System se l’host appartiene ad una rete diversa"
+    ],
+    "wrong": [
+      "Sempre l’indirizzo dell’Intermediate System",
+      "Sempre l’indirizzo dell’host di destinazione"
+    ]
+  },
+  {
+    "q": "Indicare quale risposta è vera",
+    "correct": [
+      "Un router IP rappresenta un Intermediate System ISO/OSI",
+      "Un router deve avere almeno due interfacce di rete"
+    ],
+    "wrong": [
+      "Un router IP non rappresenta un Intermediate System ISO/OSI",
+      "Un router può avere più interfacce"
+    ]
+  },
+  {
+    "q": "Quale tra i seguenti protocolli di routing è un protocollo EGP?",
+    "correct": ["BGP"],
+    "wrong": ["IBGP", "IGRP", "OSPF"]
+  },
+  {
+    "q": "Quale proprietà non è riferibile al protocollo RIP versione 1?",
+    "correct": ["È un protocollo EGP"],
+    "wrong": [
+      "È un protocollo IGP",
+      "Usa un algoritmo Vettore – Distanza",
+      "Non supporta subnets variabili"
+    ]
+  },
+  {
+    "q": "Quale protocollo è estraneo alla posta elettronica",
+    "correct": ["SNMP"],
+    "wrong": ["IMAP", "POP3", "SMTP"]
+  },
+  {
+    "q": "Indicare il significato del campo TTL nell'header del datagram IP",
+    "correct": [
+      "Indica il tempo di vita del datagram nell’Internet",
+      "Evita fenomeni di saturazione della rete Internet per effetti dovuti ad errori"
+    ],
+    "wrong": [
+      "Indica il tempo di vita del datagram nella rete locale",
+      "Serve a ridurre il traffico della rete locale"
+    ]
+  },
+  {
+    "q": "Quale è il significato del campo Protocol nell'header del datagram IP?",
+    "correct": [
+      "Indica il protocollo che ha generato la porzione di informazione",
+      "Consente all’IP di consegnare l’informazione in modo corretto"
+    ],
+    "wrong": [
+      "Indica il protocollo applicativo a cui è destinato il datagram",
+      "Non ha utilizzi pratici"
+    ]
+  },
+  {
+    "q": "Qual è il significato del campo Opzioni IP nell'header del datagram IP?",
+    "correct": [
+      "Serve per funzioni di test",
+      "Serve per funzioni di debug"
+    ],
+    "wrong": [
+      "Non ha utilizzi pratici",
+      "Serve per prevenire congestioni della rete"
+    ]
+  },
+  {
+    "q": "Indicare la classe della rete di un indirizzo che ha come primo byte 224",
+    "correct": ["Classe D"],
+    "wrong": ["Classe A", "Classe B", "Classe C"]
+  },
+  {
+    "q": "Indicare la classe della rete di un indirizzo che ha come primo byte 195",
+    "correct": ["Classe C"],
+    "wrong": ["Classe A", "Classe B", "Classe D"]
+  },
+  {
+    "q": "Indicare la classe della rete di un indirizzo che ha come primo byte 95",
+    "correct": ["Classe A"],
+    "wrong": ["Classe B", "Classe C", "Classe D"]
+  },
+  {
+    "q": "Un host con due interfacce di rete:",
+    "correct": ["Deve avere due indirizzi IP"],
+    "wrong": [
+      "Deve avere un solo indirizzo IP per evitare problemi",
+      "È indifferente se ha uno solo indirizzo o se ne ha due"
+    ]
+  },
+  {
+    "q": "Quali tra i seguenti sono indirizzi riservati?",
+    "correct": ["0.0.0.0", "127.0.0.1"],
+    "wrong": ["192.0.0.1", "0.0.0.1"]
+  },
+  {
+    "q": "Qual è il significato del codice 11 di un pacchetto ICMP?",
+    "correct": ["Time Exceeded for a datagram"],
+    "wrong": ["Address Mask Reply", "Address Mask Request"]
+  },
+  {
+    "q": "Qual è l'RFC che definisce IP multicasting?",
+    "correct": ["RFC 966"],
+    "wrong": ["RFC 822", "RFC 1157"]
+  },
+  {
+    "q": "L'RFC che definisce SNMP version 3 è:",
+    "correct": ["RFC 2200"],
+    "wrong": ["RFC 1122", "RFC 1812"]
+  },
+  {
+    "q": "Il record A consente di definire al DNS:",
+    "correct": ["L’indirizzo IP associato ad un nome di host"],
+    "wrong": [
+      "Il gestore della posta elettronica di un dominio",
+      "Il Nameserver associato ad un dominio Internet"
+    ]
+  },
+  {
+    "q": "Quali tra i seguenti sono campi definiti nell'RFC822?",
+    "correct": ["Received:", "To:", "Mime-Version"],
+    "wrong": ["Error:", "XCC:"]
+  },
+  {
+    "q": "Quali tra i seguenti file non riguarda la posta elettronica?",
+    "correct": ["/etc/mail/access", "/etc/sendmail.conf", "/etc/aliases"],
+    "wrong": ["/bin/mail", "/etc/resolv.conf"]
+  },
+  {
+    "q": "Quale funzione svolge il Network Information Server (NIS)?",
+    "correct": ["Serve per condividere le tabelle di sistema tra host Unix"],
+    "wrong": [
+      "Serve per convertire i nomi Internet in indirizzi IP",
+      "Serve per convertire gli indirizzi IP in nomi Internet",
+      "Serve per definire i file system da esportare ad altri host",
+      "Serve per condividere le risorse tra sistemi Windows"
+    ]
+  },
+  {
+    "q": "Quale tabella consente di condividere le caratteristiche degli utenti mediante NIS?",
+    "correct": ["/etc/passwd", "/etc/group", "/etc/auto.home"],
+    "wrong": ["/etc/networks", "/etc/services"]
+  },
+  {
+    "q": "Quale delle seguenti affermazioni è corretta?",
+    "correct": [
+        "Il comando per conoscere il contenuto di una mappa NIS è ypcat"
+    ],
+    "wrong": [
+        "Il comando per conoscere il dominio NIS di un host è ypwhich",
+      "Il nome del processo che esegue NIS su un client è ypserv",
+      "Il nome del processo che esegue NIS su un server è ypbind"
+    ]
+  },
+  {
+    "q": "Il Multipurpose Internet Mail Extensions (MIME) è:",
+    "correct": [
+      "Una codifica che consente di trasportare dati multimediali, se il client riconosce MIME",
+      "Una codifica per rappresentare i dati multimediali"
+    ],
+    "wrong": [
+      "Una modifica al protocollo Simple Mail Transfer Protocol (SMTP)",
+      "Una modifica del protocollo Post Office Protocol (POP)"
+    ]
+  },
+  {
+    "q": "Una trap SNMP viene generata da un agent quando:",
+    "correct": ["Nessuna delle precedenti"],
+    "wrong": [
+      "In risposta ad una interrogazione del manager",
+      "Ogni secondo",
+      "Avviene un cambiamento di stato della risorsa monitorata",
+      "L’agent non riceve correttamente una richiesta del manager"
+    ]
+  },
+  {
+    "q": "Indicare le definizioni corrette riguardo i campi dell’header di una cella ATM:",
+    "correct": [
+      "Payload type indica il tipo di dato trasportato (info di servizio o dati utente)",
+      "La UNI ha come primo campo, non presente in NNNI, il parametro GFC"
+    ],
+    "wrong": [
+      "Virtual Path Identifier indica l’identificativo del percorso all’interno di un Virtual Channel",
+      "UNI o NNI hanno identico formato nell’intestazione",
+      "Il parametro Cell Loss Priority fornisce informazioni sulle celle perse"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è vera:",
+    "correct": [
+        "Un router si comporta come un Intermediate System (IS) del modello di riferimento ISO/OSI",
+        "Il livello trasporto è presente sia nel modello di riferimento ISO/OSI che in quello TCP/IP"
+    ],
+    "wrong": [
+        "Il livello data link si occupa della comunicazione tra due modi della stessa rete",
+      "Il livello presentazione è presente sia nel modello di riferimento ISO/OSI che in quello del TCP/IP",
+      "Il livello presentazione usa i servizi del livello trasporto"
+    ]
+  },
+  {
+    "q": "Indicare le affermazioni errate in merito al modello di riferimento ISO/OSI:",
+    "correct": ["I protocolli del livello superiore offrono i servizi a quelli del livello inferiore"],
+    "wrong": [
+      "Livelli adiacenti comunicano attraverso le loro interfacce",
+      "Ogni livello è costituito da uno o più entità",
+      "Le entità appartenenti allo stesso livello dello stesso host sono definite peer entities",
+      "L’entità di livello N fruisce dei servizi dell’entità N-1 attraverso service access point di livello N-1"
+    ]
+  },
+  {
+    "q": "Nell’allocazione automatica del DHCP un indirizzo IP:",
+    "correct": ["Viene assegnato ad un client per il solo periodo in cui è connesso"],
+    "wrong": [
+      "Viene assegnato ad uno specifico client in maniera permanente",
+      "Viene generato casualmente dal server",
+      "Viene assegnato in base al tipo di sistema operativo dell’host che lo richiede",
+      "Viene assegnato in base alla tipologia di rete utilizzata"
+    ]
+  },
+  {
+    "q": "Indicare le affermazioni corrette per la rete ATM:",
+    "correct": [
+        "AAL2 offre servizi a bit rate costante",
+        "AAL3/4 implementa i servizi streaming mode e message mode"
+    ],
+    "wrong": [
+        "AAL5 è adatto per applicazioni TCP/IP",
+      "AAL1 è adatto per applicazioni voce e video digitali",
+      "AAL3/4 offre servizi per applicazioni sensibili a cell delay"
+    ]
+  },
+  {
+    "q": "Quale tra i seguenti protocolli di routing è un protocollo EGP?",
+    "correct": ["X.225"],
+    "wrong": ["IBGP", "IGRP", "FR", "BGP"]
+  },
+  {
+    "q": "Il record PTR consente al DNS di definire:",
+    "correct": ["Di fornire il nome host associato ad un indirizzo IP"],
+    "wrong": [
+      "Un alias per il nome di un host",
+      "Il server che gestisce la posta per il dominio",
+      "Il server caching only per il dominio",
+      "Nessuna delle precedenti"
+    ]
+  },
+  {
+    "q": "Sendmail:",
+    "correct": [
+      "È un programma di trasporto di posta elettronica",
+      "Si basa sul protocollo SMTP per il trasferimento delle email"
+    ],
+    "wrong": [
+      "È un’interfaccia utente per la visualizzazione delle email",
+      "Fornisce alias di posta",
+      "Permette la composizione del testo delle email"
+    ]
+  },
+  {
+    "q": "Indicare quale affermazione è vera, nel caso della rete ATM:",
+    "correct": [
+        "Nel modello di riferimento di ATM, il layer management serve per gestire i flussi informativi di operation e maintenance"
+    ],
+    "wrong": [
+        "Nel modello di riferimento di ATM, gli AAL servono per adattare user plane e control plane al livello ATM",
+      "Nel modello di riferimento di ATM, servono per adattare user plane e control plane al livello fisico",
+      "Nel modello di riferimento di ATM, AAL è definito nel plane management",
+      "Nel modello di riferimento di ATM, il segmentation and reassembly è definito nel physical layer"
+    ]
+  },
+  {
+    "q": "Indicare quale tipo di messaggio non è usato da BGP:",
+    "correct": ["Hello message"],
+    "wrong": [
+      "Open message",
+      "Update message",
+      "Notification message",
+      "Keepalive message"
+    ]
+  },
+  {
+    "q": "Cosa stabilisce la seguente regola di filtraggio 'iptables -A INPUT -s 127.0.0.1 -p icmp -j DROP'?",
+    "correct": [
+        "Viene aggiunto alla tabella di filter il rifiuto di tutti i pacchetti, ad eccezione di quelli ICMP, provenienti dall’indirizzo 127.0.0.1"
+    ],
+    "wrong": [
+        "Viene aggiunto alla tabella di filter il rifiuto di tutti i pacchetti ICMP provenienti dall’indirizzo 127.0.0.1",
+      "Viene aggiunto alla tabella di filter l’accettazione di tutti i pacchetti ICMP provenienti dall’indirizzo 127.0.0.1",
+      "Viene cancellato dalla tabella di filter il rifiuto di tutti i pacchetti ICMP provenienti dall’indirizzo 127.0.0.1",
+      "Nessuna delle precedenti"
+    ]
+  },
+  {
+    "q": "Indicare quale affermazione non è appropriata a proposito del protocollo Frame Relay:",
+    "correct": [
+      "Il protocollo non supporta applicazioni isocrone nativegp"
+    ],
+    "wrong": [
+      "Ha prestazioni superiori a X.25",
+      "È un protocollo a livello 2 del modello di riferimento ISO/OSI",
+      "È disegnato per interconnettere router remoti in modo efficiente",
+      "Il controllo dell’errore è limitato essenzialmente ai nodi periferici della rete"
+    ]
+  },
+  {
+    "q": "Indicare le affermazioni corrette riguardo BGP:",
+    "correct": [
+      "BGP usa pacchetti keepalive per verificare l’integrità delle sessioni con i peers",
+      "BGP invia pacchetti di tipo notification per informare di problemi o errori i peers"
+    ],
+    "wrong": [
+      "BGP non può effettuare routing di tipo pass-through",
+      "BGP usa la porta 115",
+      "BGP definisce 4 tipi di messaggio"
+    ]
+  },
+  {
+    "q": "Quali sono i vantaggi di NFS?",
+    "correct": [
+      "Riduzione spazio disco locale",
+      "Manipolazione dei file remoti con comandi UNIX locali",
+      "Semplificazione del task di supporto"
+    ],
+    "wrong": [
+      "Ottimo bilanciamento del traffico di rete",
+      "Autenticazione singola"
+    ]
+  },
+  {
+    "q": "Indicare quale delle seguenti affermazioni è appropriata per il livello di trasporto:",
+    "correct": [
+        "È il primo livello end-to-end (dal basso verso l’alto della pila ISO/OSI)",
+        "Garantisce il trasferimento affidabile di informazioni"
+    ],
+    "wrong": [
+        "Mette in comunicazione le applicazioni dei due nodi comunicanti",
+      "È responsabile della scelta del cammino da intraprendere per effettuare la comunicazione",
+      "È responsabile della compressione/decompressione dei dati"
+    ]
+  },
+  {
+    "q": "Indicare le affermazioni corrette in merito al routing:",
+    "correct": [
+      "Gli algoritmi di routing usano metriche che dipendono dalla lunghezza e dall’affidabilità del percorso tra due nodi ospf",
+      "Gli algoritmi di routing considerano carico e costi relativi del link"
+    ],
+    "wrong": [
+      "Gli algoritmi di routing usano metriche che dipendono dai costi di comunicazione tra due nodi",
+      "RIP ottimizza il routing in base al numero di IS presenti"
+    ]
+  },
+  {
+    "q": "Quali sono le fasi previste in un processo DHCP?",
+    "correct": [
+      "Discovery, offering, request e acknowledgement"
+    ],
+    "wrong": [
+      "Requesting, offering e acknowledgement",
+      "Offering, required e acknowledgement",
+      "Requesting, assignment e acknowledgement",
+      "Offering, query, assignment e acknowledgement"
+    ]
+  },
+  {
+    "q": "Nell’ambito della sicurezza di rete, cosa si intende per 'Accountability'?",
+    "correct": [
+        "Grado di utilizzo di una risorsa"
+    ],
+    "wrong": [
+        "Individuazione di chi ha invocato una operazione in un sistema informativo",
+      "Controllo degli utenti di un sistema informatico",
+      "Il livello di sicurezza di un sistema informativo",
+      "Un componente del sistema operativo che verifica i diritti di accesso di un utente"
+    ]
+  },
+  {
+    "q": "In una rete suddivisa in molteplici sottoreti si deve:",
+    "correct": [
+        "Si può configurare un server DHCP per ogni sottorete, ma è poco efficiente"
+    ],
+    "wrong": [
+        "Occorre configurare per ogni sottorete un DHCP relay agent che monitorizza i broadcast DHCP",
+      "È sufficiente configurare un solo server DHCP",
+      "Configurare il protocollo bootstrap in quanto il DHCP non è utilizzabile in questa situazione",
+      "I client devono essere configurati manualmente"
+    ]
+  },
+  {
+    "q": "Nel sistema ISO/OSI, a che livello si pone il File Transfer Protocol? (file dice trasporto, internet dice altro)",
+    "correct": ["A livello applicativo"],
+    "wrong": [
+      "A livello di sessione",
+      "A livello fisico",
+      "A livello di trasporto",
+      "A livello di presentazione"
+    ]
+  },
+  {
+    "q": "Nell’ambito della sicurezza di rete, cosa si intende per 'attacco'?",
+    "correct": [
+      "Sequenza di azioni eseguite per ottenere il controllo di un sistema informativo"
+    ],
+    "wrong": [
+      "Tentativo di lettura di un messaggio di posta elettronica",
+      "Sequenza di azioni eseguite per corrompere un DBMS",
+      "Sequenza di operazioni effettuate per corrompere un router",
+      "Programma software sviluppato al fine di controllare il traffico di rete di un host"
+    ]
+  },
+  {
+    "q": "Il record NS consente al DNS di definire:",
+    "correct": [
+      "Il server autorizzato a rispondere per il dominio"
+    ],
+    "wrong": [
+      "Il server che gestisce la posta per un host o un dominio",
+      "È un record inesistente",
+      "Il server NIS per il dominio",
+      "Nessuna delle precedenti"
+    ]
+  },
+  {
+    "q": "Quale mezzo trasmissivo, ove è possibile utilizzarlo, offre il miglior rapporto costo/prestazioni?",
+    "correct": ["Fibra ottica"],
+    "wrong": [
+      "Cavo coax Thin Ethernet",
+      "Cavo coax Thick Ethernet",
+      "Cavo STP",
+      "Cavo UTP"
+    ]
+  },
+  {
+    "q": "Nell’ambito della sicurezza di rete, cosa si intende per 'vulnerabilità procedurale'?",
+    "correct": ["Difetto della modalità con cui si opera"],
+    "wrong": [
+      "Difetto della modalità di aggiornamento del personale",
+      "Difetto nell’implementazione dello sviluppo del sistema informativo",
+      "Difetto nella pianificazione dei rischi di un sistema informativo"
+    ]
+  }
+]
