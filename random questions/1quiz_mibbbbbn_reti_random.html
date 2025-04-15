@@ -15,6 +15,7 @@
     .result, .feedback { font-weight: bold; margin-top: 1rem; }
     .correct { color: green; }
     .wrong { color: red; }
+    .correct-answer { background: #c8e7a4; }
   </style>
 </head>
 <body>
@@ -606,6 +607,14 @@
         selectedValues.length === correctAnswers.length &&
         selectedValues.every(val => correctAnswers.includes(val)) &&
         correctAnswers.every(val => selectedValues.includes(val));
+
+      // Highlight correct answers
+      const answerOptions = document.querySelectorAll(`input[name=q${currentQuestion}]`);
+      answerOptions.forEach(option => {
+        if (correctAnswers.includes(parseInt(option.value))) {
+          option.parentElement.classList.add('correct-answer'); // Add the green background
+        }
+      });
 
       if (isCorrect) {
         feedbackDiv.textContent = "Risposta corretta!";
